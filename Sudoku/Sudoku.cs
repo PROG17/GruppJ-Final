@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace Sudoku
 {
@@ -71,9 +72,13 @@ namespace Sudoku
                             board[i,j] = Search(i, j); //Anropa metod som tilldelar cellen sitt logiskt möjliga värde
 
                         }
+                        Thread.Sleep(10);
+                        Console.Clear();
+                        DisplayBoard();
                     }
                 }   
             }
+            Console.Clear();
             Console.WriteLine("\nSolved!\n");
             DisplayBoard();
         }
