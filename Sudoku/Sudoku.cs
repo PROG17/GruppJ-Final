@@ -88,6 +88,51 @@ namespace Sudoku
             return returvärde;
         }
 
+        public int ControlRow(int row, int col)
+        {
+            int returvärde = 0;
+            int[] possible = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+            for (int i = 0; i < 9; i++)
+            {
+                for (int j = 0; j < possible.Length; j++)
+                {
+                    if (possible[j] == board[row, i]) possible[j] = 0;
+                }
+            }
+            Array.Sort(possible);
+            if (possible[8] != 0 && possible[7] == 0)
+            {
+                returvärde = possible[8];
+                return returvärde;
+            }
+            else
+            {
+                returvärde = ControlCol(col, row, possible);
+                return returvärde;
+            }
 
+        }
+
+        private int ControlCol(int col, int row, int[] array)
+        {
+            int returvärde = 0;
+            int[] possible = array;
+            for (int i = 0; i < 9; i++)
+            {
+                for (int j = 0; j < possible.Length; j++)
+                {
+                    if (possible[j] == board[i, col]) possible[j] = 0;
+                }
+            }
+            Array.Sort(array);
+            if (array[8] != 0 && array[7] == 0)
+            {
+                returvärde = array[8];
+                return returvärde;
+            }
+            else
+                returvärde = ControlBox(row, col, array);
+            return returvärde;
+        }
     }
 }
