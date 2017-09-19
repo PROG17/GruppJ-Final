@@ -72,10 +72,11 @@ namespace Sudoku
                             board[i,j] = Search(i, j); //Anropa metod som tilldelar cellen sitt logiskt möjliga värde
 
                         }
-                        Thread.Sleep(10);
-                        Console.Clear();
-                        DisplayBoard();
+                        
                     }
+                    Thread.Sleep(250);
+                    Console.Clear();
+                    DisplayBoard();
                 }   
             }
             Console.Clear();
