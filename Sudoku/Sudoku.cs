@@ -54,7 +54,39 @@ namespace Sudoku
                 
             }
         }
+        public void Solve()
+        {
+            bool solved = false;
+            int x = 0;
+            while (solved == false)
+            {
+                solved = true;
+                for (int i = 0; i < 9; i++)
+                {
+                    for (int j = 0; j < 9; j++)
+                    {
+                        if (board[i, j] == 0)  //Om nuvarande cell innehåller värdet 0 så:
+                        {
+                            solved = false;
+                            board[i,j] = Search(i, j); //Anropa metod som tilldelar cellen sitt logiskt möjliga värde
 
+                        }
+                    }
+                }   
+            }
+            Console.WriteLine("\nSolved!\n");
+            DisplayBoard();
+        }
+        public int Search(int row/*i*/, int col/*j*/)
+        {
+            int nyttnr=0;
+            int returvärde = 0;
+            nyttnr=ControlRow(row, col);
+
+            if (nyttnr != 0) returvärde = nyttnr;
+            
+            return returvärde;
+        }
 
 
     }
