@@ -134,5 +134,40 @@ namespace Sudoku
                 returvärde = ControlBox(row, col, array);
             return returvärde;
         }
+        private int ControlBox (int row, int col, int[]array)
+        {
+            int returvärde = 0;
+            int[] possible = array;
+
+            if (row == 1 || row == 4 || row == 7) row--;
+            else if (row == 2 || row == 5 || row == 8) row = row - 2;
+
+            if (col == 1 || col == 4 || col == 7) col--;
+            else if (col == 2 || col == 5 || col == 8) col = col - 2;
+            int colreset = col;
+
+            for (int i = 0; i < 3; i++)
+            {
+                col = colreset;
+                for (int j = 0; j < 3; j++)
+                {
+                    for (int k = 0; k < possible.Length; k++)
+                    {
+                        if (possible[k] == board[row, col]) possible[k] = 0;
+                    }
+                    col++;
+                }
+                row++;  
+            }
+            Array.Sort(array);
+            if (array[8] != 0 && array[7] == 0)
+            {
+                returvärde = array[8];
+                return returvärde;
+            }
+            else
+                
+            return 0;
+        }
     }
 }
