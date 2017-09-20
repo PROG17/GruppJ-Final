@@ -16,7 +16,7 @@ namespace SudokuHard
         private int index = 0;
         int[,] board = new int[9,9];
         private bool solved = false;
-        List<int> numbersOnRow = new List<int>();
+        List<int> numbersOnLines = new List<int>();
 
         //constructor
         public Sudoku(string num)
@@ -72,7 +72,8 @@ namespace SudokuHard
                         var temp = board[i, j];
                         if (temp == 0)
                         {
-                            numbersOnRow = SearchRow(i);
+                            numbersOnLines = SearchLines(i, j);
+                            
                         }
                     }
                 }
@@ -80,7 +81,7 @@ namespace SudokuHard
         }
 
 
-        private List<int> SearchRow(int row)
+        private List<int> SearchLines(int row, int col)
         {
             
             List<int> numbersFound = new List<int>();
@@ -88,6 +89,14 @@ namespace SudokuHard
             for (int j = 0; j < 9; j++)
             {
                 var temp = board[row, j];
+                if (temp > 0)
+                {
+                    numbersFound.Add(temp);
+                }
+            }
+            for (int j = 0; j < 9; j++)
+            {
+                var temp = board[j, col];
                 if (temp > 0)
                 {
                     numbersFound.Add(temp);
