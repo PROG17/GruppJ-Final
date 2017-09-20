@@ -75,13 +75,18 @@ namespace SudokuHard
                             numbersOnLines = SearchLines(i, j);
                             
                         }
+                        foreach (var item in numbersOnLines)
+                        {
+                            Console.WriteLine(item);
+                        }
+                        Console.ReadKey();
                     }
                 }
             }
         }
 
 
-        private List<int> SearchLines(int row, int col)
+        private List<int> SearchLines(int row, int col) //Hämtar siffror i cellens rad, kol och box
         {
             
             List<int> numbersFound = new List<int>();
@@ -101,6 +106,23 @@ namespace SudokuHard
                 {
                     numbersFound.Add(temp);
                 }
+            }
+            row = (row / 3) * 3;
+            col = (col / 3) * 3;
+            int colreset = col;
+            for (int i = 0; i < 3; i++)
+            {
+                col = colreset;
+                for (int j = 0; j < 3; j++)
+                {
+                    var temp = board[row, col];
+                    if (temp > 0)
+                    {
+                        numbersFound.Add(temp);
+                    }
+                    col++;
+                }
+                row++;
             }
             return numbersFound;
             
