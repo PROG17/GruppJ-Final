@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -15,6 +16,7 @@ namespace SudokuHard
         private int index = 0;
         int[,] board = new int[9,9];
         private bool solved = false;
+        List<int> numbersOnRow = new List<int>();
 
         //constructor
         public Sudoku(string num)
@@ -67,11 +69,34 @@ namespace SudokuHard
                 {
                     for (int j = 0; j < 9; j++)
                     {
-                        
+                        var temp = board[i, j];
+                        if (temp == 0)
+                        {
+                            numbersOnRow = SearchRow(i);
+                        }
                     }
                 }
             }
         }
 
+
+        private List<int> SearchRow(int row)
+        {
+            
+            List<int> numbersFound = new List<int>();
+
+            for (int j = 0; j < 9; j++)
+            {
+                var temp = board[row, j];
+                if (temp > 0)
+                {
+                    numbersFound.Add(temp);
+                }
+            }
+            return numbersFound;
+            
+
+
+        }
     }
 }
