@@ -73,24 +73,29 @@ namespace SudokuHard
                         if (temp == 0)//Om värdet är 0
                         {
                             List<int> numbersPrintedList = new List<int>(); //Lista att spara ner färdiga värden i cellens rad, kolumn och box
-                            numbersPrintedList = SearchLines(i, j); //Hämta in färdiga värden som inte kan skrivas ut
                             List<int> validNumbers = new List<int>(); //Lista för möjliga siffror
-                            for (int k = 1; k <= 9; k++)
+                            numbersPrintedList = GetPrintedNumbers(i, j); //Hämta in färdiga värden som inte kan skrivas ut
+                            for (int k = 1; k <= 9; k++) //fyll listan med siffror 1-9
                             {
-                                validNumbers.Add(k);   //Fyll listan med siffror 1-9
+                                validNumbers.Add(k);   
                             }
-                            foreach (var item in numbersPrintedList)
+                            foreach (var item in numbersPrintedList) //Plocka bort siffror som redan finns i cellens "fält"
                             {
-                                validNumbers.Remove(item); //Plocka bort siffror som redan finns i cellens "fält"
+                                validNumbers.Remove(item); 
                             }
 
+
+
+
+
+
                             Console.WriteLine("Nr upptagna från cell");
-                            foreach (var item in numbersPrintedList) ////Skriver ut redan existerande värden (Endast kontroll)
+                            foreach (var item in numbersPrintedList)////Skriver ut redan existerande värden (Endast kontroll)
                             {
                                 Console.WriteLine(item);
                             }
                             Console.WriteLine("\nMöjliga nr");
-                            foreach (var item in validNumbers) ////Skriver ut redan existerande värden (Endast kontroll)
+                            foreach (var item in validNumbers)////Skriver ut redan existerande värden (Endast kontroll)
                             {
                                 Console.WriteLine(item);
                             }
@@ -104,7 +109,7 @@ namespace SudokuHard
         }
 
 
-        private List<int> SearchLines(int row, int col) //Hämtar siffror i cellens rad, kol och box
+        private List<int> GetPrintedNumbers(int row, int col) //Hämtar siffror i cellens rad, kol och box
         {
             
             List<int> numbersFound = new List<int>();
