@@ -16,10 +16,10 @@ namespace SudokuHard
         private int index = 0;
         int[,] board = new int[9,9];
         private bool solved = false;
-        List<int> numbersOnLines = new List<int>();
+        //List<int> numbersPrintedList = new List<int>(); //Lista att spara ner färdiga värden i cellens rad, kolumn och box
 
         //constructor
-        public Sudoku(string num)
+        public Sudoku(string num) //Tar emot sträng med "spelet" och konverterar till spelbräde.
         {
             nums = num;
             BoardBuilder();
@@ -37,7 +37,7 @@ namespace SudokuHard
                 }
             }
             DisplayBoard();
-        }
+        } //Skapar spelbräda
 
         private void DisplayBoard()
         {
@@ -59,27 +59,45 @@ namespace SudokuHard
                 }
 
             }
-        }
+        }//Skriver ut spelbrädet
 
         public void solve()
         {
-            while (!solved)
+            while (!solved) //Lopp som upprepas till pusslet är löst
             {
                 for (int i = 0; i < 9; i++)
                 {
                     for (int j = 0; j < 9; j++)
                     {
-                        var temp = board[i, j];
-                        if (temp == 0)
+                        var temp = board[i, j]; //Variabel får värdet i aktuell cell
+                        if (temp == 0)//Om värdet är 0
                         {
-                            numbersOnLines = SearchLines(i, j);
-                            
+                            List<int> numbersPrintedList = new List<int>(); //Lista att spara ner färdiga värden i cellens rad, kolumn och box
+                            numbersPrintedList = SearchLines(i, j); //Hämta in färdiga värden som inte kan skrivas ut
+                            List<int> validNumbers = new List<int>(); //Lista för möjliga siffror
+                            for (int k = 1; k <= 9; k++)
+                            {
+                                validNumbers.Add(k);   //Fyll listan med siffror 1-9
+                            }
+                            foreach (var item in numbersPrintedList)
+                            {
+                                validNumbers.Remove(item); //Plocka bort siffror som redan finns i cellens "fält"
+                            }
+
+                            Console.WriteLine("Nr upptagna från cell");
+                            foreach (var item in numbersPrintedList) ////Skriver ut redan existerande värden (Endast kontroll)
+                            {
+                                Console.WriteLine(item);
+                            }
+                            Console.WriteLine("\nMöjliga nr");
+                            foreach (var item in validNumbers) ////Skriver ut redan existerande värden (Endast kontroll)
+                            {
+                                Console.WriteLine(item);
+                            }
+                            Console.ReadKey();
+
                         }
-                        foreach (var item in numbersOnLines)
-                        {
-                            Console.WriteLine(item);
-                        }
-                        Console.ReadKey();
+                        
                     }
                 }
             }
@@ -124,6 +142,7 @@ namespace SudokuHard
                 }
                 row++;
             }
+            numbersFound = numbersFound.Distinct().ToList();
             return numbersFound;
             
 
