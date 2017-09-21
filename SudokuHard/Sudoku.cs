@@ -5,6 +5,7 @@ using System.Globalization;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace SudokuHard
@@ -15,11 +16,8 @@ namespace SudokuHard
         private string nums = "";
         private int index = 0;
         static int[,] board = new int[9, 9];
-        int[,] clone = board;
-        private bool solved = false;
-        //List<int> numbersPrintedList = new List<int>(); //Lista att spara ner färdiga värden i cellens rad, kolumn och box
 
-        //constructor
+
         public Sudoku(string num) //Tar emot sträng med "spelet" och konverterar till spelbräde.
         {
             nums = num;
@@ -61,127 +59,91 @@ namespace SudokuHard
 
             }
         }//Skriver ut spelbrädet
-
+        int UNASSIGNED = 0;
         public void Solve()
         {
+            bool solved = SolveSudoku(board);
+            Console.WriteLine("To solve, press any key");
+            Console.ReadKey();
+            if (solved == true)
+            {
+                Console.Clear();
+                DisplayBoard();
+                Console.WriteLine("Solved!!\n");
+                
+            }
+        }
 
+
+        bool SolveSudoku(int[,] board)
+        {
             do
             {
-                Search(clone);
-            } while (false);
-            Console.WriteLine("Solved\n");
-            DisplayBoard();
+                for (int row = 0; row < 9; row++)
+                {
+                    for (int col = 0; col < 9; col++)
+                    {
+                        if (!FindUnassignedLocation(board, row, col))
+                            return true; // Brädet fullt!
+
+                        if (CurrentUnassigned(board, row, col))
+                        {
+                            for (int val = 1; val <= 9; val++) // 1-9
+                            {
+                                if (NoConflicts(row, col, val, board) == true) //Om # är möjlig
+                                {
+
+                                    board[row, col] = val;  //Försök sätta ut # 
+                                    
+                                    if (board[row, col] != 0)
+                                    {
+                                        if (SolveSudoku(board)) return true;  
+                                    }
+                                    board[row, col] = UNASSIGNED; //Ta bort och försök igen
+
+
+                                }
+
+                            }
+                            if (board[row, col] == UNASSIGNED) return false;
+                        }
+                    }
+                    
+
+                }
+                
+                return false;//Aktiverar Backtracking
+            } while (true);
+
+
+
+
         }
-        public bool Search(int[,] array)
+        public bool FindUnassignedLocation(int[,] board, int row, int col) //Om return=True så hittade den en Nolla
         {
-            bool solved = true;
-            //while (!solved) //Lopp som upprepas till pusslet är löst
-            //{
             for (int i = 0; i < 9; i++)
             {
                 for (int j = 0; j < 9; j++)
                 {
-                    var temp = array[i, j]; //Variabel får värdet i aktuell cell
-                    if (temp == 0)//Om värdet är 0
-                    {
-                        solved = false;
-                        List<int> numbersPrintedList = new List<int>(); //Lista att spara ner färdiga värden i cellens rad, kolumn och box
-                        List<int> validNumbers = new List<int>(); //Lista för möjliga siffror
-                        numbersPrintedList = GetPrintedNumbers(i, j); //Hämta in färdiga värden som inte kan skrivas ut
-                        for (int k = 1; k <= 9; k++) //fyll listan med siffror 1-9
-                        {
-                            validNumbers.Add(k);
-                        }
-                        foreach (var item in numbersPrintedList) //Plocka bort siffror som redan finns i cellens "fält"
-                        {
-                            validNumbers.Remove(item);
-                        } //Nu innehåller listan de möjliga värdena för cellen.
-                        foreach (var item in validNumbers)
-                        {
-                            array[i, j] = item;
-
-                            if (CheckMove(i, j, item, array) == true)
-                            {
-                                if (Search(array) == true)
-                                {
-                                    clone[i, j] = array[i, j];
-                                    return true;
-                                }
-                            }
-
-                        }
-                        
-                        //Console.WriteLine("Nr upptagna från cell");
-                        //foreach (var item in numbersPrintedList)////Skriver ut redan existerande värden (Endast kontroll)
-                        //{
-                        //    Console.WriteLine(item);
-                        //}
-                        //Console.WriteLine("\nMöjliga nr");
-                        //foreach (var item in validNumbers)////Skriver ut redan existerande värden (Endast kontroll)
-                        //{
-                        //    Console.WriteLine(item);
-                        //}
-                        //Console.ReadKey();
-
-                    }
-
+                    if (board[i, j] == 0) return true;
                 }
-            }
-            if (solved == false) return false;
-            else return true;
-            //}
+            }            
+            return false;
         }
-
-
-        private List<int> GetPrintedNumbers(int row, int col) //Hämtar siffror i cellens rad, kol och box
+        public bool CurrentUnassigned(int[,] board, int row, int col)
         {
-
-            List<int> numbersFound = new List<int>();
-
-            for (int j = 0; j < 9; j++)
-            {
-                var temp = board[row, j];
-                if (temp > 0)
-                {
-                    numbersFound.Add(temp);
-                }
-            }
-            for (int j = 0; j < 9; j++)
-            {
-                var temp = board[j, col];
-                if (temp > 0)
-                {
-                    numbersFound.Add(temp);
-                }
-            }
-            row = (row / 3) * 3;
-            col = (col / 3) * 3;
-            int colreset = col;
-            for (int i = 0; i < 3; i++)
-            {
-                col = colreset;
-                for (int j = 0; j < 3; j++)
-                {
-                    var temp = board[row, col];
-                    if (temp > 0)
-                    {
-                        numbersFound.Add(temp);
-                    }
-                    col++;
-                }
-                row++;
-            }
-            numbersFound = numbersFound.Distinct().ToList();
-            return numbersFound;
-
-
-
+            if (board[row, col] == UNASSIGNED) return true;
+            return false;
         }
+
         static bool CheckRow(int row, int val, int[,] arr)
         {
             for (int i = 0; i < 9; i++)
             {
-                if (arr[row, i] == val) return false;
+                if (arr[row, i] == val)
+                {                    
+                    return false;
+                }
             }
             return true;
         }
@@ -189,28 +151,40 @@ namespace SudokuHard
         {
             for (int i = 0; i < 9; i++)
             {
-                if (arr[col, i] == val) return false;
+                if (arr[i, col] == val)
+                {
+                    return false;
+                }
             }
             return true;
         }
         static bool CheckBox(int row, int col, int val, int[,] arr)
         {
+            row = (row / 3) * 3;
+            col = (col / 3) * 3;
+            int colreset = col;
+
             for (int i = 0; i < 3; i++)
             {
                 for (int j = 0; j < 3; j++)
                 {
-                    if (arr[row - (row % 3) + i, col - (col % 3) + j] == val) return false;
+                    if (arr[row, col] == val)
+                    {                       
+                        return false;
+                    }
+                    col++;
                 }
+                row++;
+                col = colreset;
             }
             return true;
         }
-        static bool CheckMove(int row, int col, int val, int[,] arr)
-        {
+        static bool NoConflicts(int row, int col, int val, int[,] arr)
+        {           
             if (!CheckRow(row, val, arr)) return false;
             if (!CheckCol(col, val, arr)) return false;
-            if (!CheckBox(row, col, val, arr)) return false;
+            if (!CheckBox(row, col, val, arr)) return false;           
             return true;
-
         }
 
     }
