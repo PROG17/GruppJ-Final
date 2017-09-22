@@ -8,5 +8,13 @@ namespace Spel
 {
     class Room
     {
+        private string Description;
+        private string Name;
+
+        public Room(string description, string name)
+        {
+            Description = description;
+            Name = name;
+        }
     }
 }

@@ -15,6 +15,7 @@ namespace SudokuHard
         //fields
         private string nums = "";
         private int index = 0;
+        int UNASSIGNED = 0;
         static int[,] board = new int[9, 9];
 
 
@@ -59,7 +60,7 @@ namespace SudokuHard
 
             }
         }//Skriver ut spelbrädet
-        int UNASSIGNED = 0;
+        
         public void Solve()
         {
             bool solved = SolveSudoku(board);
@@ -73,7 +74,6 @@ namespace SudokuHard
                 
             }
         }
-
 
         bool SolveSudoku(int[,] board)
         {
@@ -92,32 +92,20 @@ namespace SudokuHard
                             {
                                 if (NoConflicts(row, col, val, board) == true) //Om # är möjlig
                                 {
-
-                                    board[row, col] = val;  //Försök sätta ut # 
-                                    
+                                    board[row, col] = val;  //Försök sätta ut #                                     
                                     if (board[row, col] != 0)
                                     {
                                         if (SolveSudoku(board)) return true;  
                                     }
                                     board[row, col] = UNASSIGNED; //Ta bort och försök igen
-
-
                                 }
-
                             }
                             if (board[row, col] == UNASSIGNED) return false;
                         }
-                    }
-                    
-
-                }
-                
+                    }                  
+                }                
                 return false;//Aktiverar Backtracking
             } while (true);
-
-
-
-
         }
         public bool FindUnassignedLocation(int[,] board, int row, int col) //Om return=True så hittade den en Nolla
         {

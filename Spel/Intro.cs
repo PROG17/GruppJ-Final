@@ -12,7 +12,8 @@ namespace Spel
         {
             for (int i = 0; i < 1; i++)
             {
-                Console.WriteLine(@" ___ ___   ____  _____ ______    ___  ____  ______  __ __  ____    ___  _____ 
+                Console.WriteLine(@" 
+ ___ ___   ____  _____ ______    ___  ____  ______  __ __  ____    ___  _____ 
 |   |   | /    |/ ___/|      |  /  _]|    \|      ||  |  ||    |  /  _]|     |
 | _   _ ||  o  (   \_ |      | /  [_ |  D  )      ||  |  | |  |  /  [_ |   __|
 |  \_/  ||     |\__  ||_|  |_||    _]|    /|_|  |_||  _  | |  | |    _]|  |_  
@@ -21,14 +22,16 @@ namespace Spel
 |___|___||__|__| \___|  |__|  |_____||__|\_| |__|  |__|__||____||_____||__|   
                                                                               ");
                 Console.WriteLine("\t\t\tA game by Jocke and Gustav");
-                Console.Beep(440, 200);
-                Console.Beep(840, 200);
-                Console.Beep(440, 200);
-                Console.Beep(840, 200);
-                Console.Beep(440, 200);
-                Console.Beep(400, 200);
-                Console.Beep(600, 200);
-                Console.Beep(660, 200);
+                Console.Beep(440, 150);
+                Console.Beep(840, 150);
+                Console.Beep(440, 150);
+                Console.Beep(840, 150);
+                Console.Beep(440, 150);
+                Console.Beep(400, 150);
+                Console.Beep(600, 150);
+                Console.Beep(660, 150);
+                
+                
 
             }
         }
