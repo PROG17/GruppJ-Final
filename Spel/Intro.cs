@@ -1,0 +1,37 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Spel
+{
+    static class Intro
+    {
+        static public void PlayIntro()
+        {
+            for (int i = 0; i < 1; i++)
+            {
+                Console.WriteLine(@" ___ ___   ____  _____ ______    ___  ____  ______  __ __  ____    ___  _____ 
+|   |   | /    |/ ___/|      |  /  _]|    \|      ||  |  ||    |  /  _]|     |
+| _   _ ||  o  (   \_ |      | /  [_ |  D  )      ||  |  | |  |  /  [_ |   __|
+|  \_/  ||     |\__  ||_|  |_||    _]|    /|_|  |_||  _  | |  | |    _]|  |_  
+|   |   ||  _  |/  \ |  |  |  |   [_ |    \  |  |  |  |  | |  | |   [_ |   _] 
+|   |   ||  |  |\    |  |  |  |     ||  .  \ |  |  |  |  | |  | |     ||  |   
+|___|___||__|__| \___|  |__|  |_____||__|\_| |__|  |__|__||____||_____||__|   
+                                                                              ");
+              
+                    Console.Beep(440, 200);
+                    Console.Beep(840, 200);
+                    Console.Beep(440, 200);
+                    Console.Beep(840, 200);
+                    Console.Beep(440, 200);
+                    Console.Beep(400, 200);
+                    Console.Beep(600, 200);
+                    Console.Beep(660, 200);
+                
+            }
+        }
+    }
+
+}

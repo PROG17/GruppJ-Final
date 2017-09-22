@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.16
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spel", "Spel.csproj", "{6C30871C-421C-4202-9A74-E514F777539B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6C30871C-421C-4202-9A74-E514F777539B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C30871C-421C-4202-9A74-E514F777539B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C30871C-421C-4202-9A74-E514F777539B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C30871C-421C-4202-9A74-E514F777539B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {850FDC9E-EB90-470C-9561-86EF4E369F0D}
+	EndGlobalSection
+EndGlobal
