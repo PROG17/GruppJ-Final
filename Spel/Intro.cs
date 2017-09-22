@@ -20,16 +20,16 @@ namespace Spel
 |   |   ||  |  |\    |  |  |  |     ||  .  \ |  |  |  |  | |  | |     ||  |   
 |___|___||__|__| \___|  |__|  |_____||__|\_| |__|  |__|__||____||_____||__|   
                                                                               ");
-              
-                    Console.Beep(440, 200);
-                    Console.Beep(840, 200);
-                    Console.Beep(440, 200);
-                    Console.Beep(840, 200);
-                    Console.Beep(440, 200);
-                    Console.Beep(400, 200);
-                    Console.Beep(600, 200);
-                    Console.Beep(660, 200);
-                
+                Console.WriteLine("\t\t\tA game by Jocke and Gustav");
+                Console.Beep(440, 200);
+                Console.Beep(840, 200);
+                Console.Beep(440, 200);
+                Console.Beep(840, 200);
+                Console.Beep(440, 200);
+                Console.Beep(400, 200);
+                Console.Beep(600, 200);
+                Console.Beep(660, 200);
+
             }
         }
     }
