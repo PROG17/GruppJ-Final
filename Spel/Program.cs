@@ -17,7 +17,7 @@ namespace Spel
                 "In front of the sofa is a coffee table with a fruit bowl and a magazine on. In front of the coffee table is a black flatscreen TV." +
                 "Along the right side is an antique drawer in dark wood with a lamp on. " +
                 "There are three possible exits from the Living Room. One door leads to what looks like an office. Next leads to the " +
-                "dining room. The third door, which is closed, has a sign as it says \"Bathroom\" on.", "Living room");
+                "dining room. The third door, which is closed, has a sign that says \"Bathroom\" on it.", "Living room");
 
             Room office = new Room("You are in the office.\n" +
                 "The office is quite small but it houses one desk with one big drawer and a stationary computer. There are two small windows wich allows the moonlight to " +
