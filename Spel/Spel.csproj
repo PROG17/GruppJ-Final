@@ -42,7 +42,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Init.cs" />
     <Compile Include="Intro.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="Objects.cs" />
