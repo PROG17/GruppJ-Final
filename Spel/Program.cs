@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace Spel
 {
@@ -101,19 +102,17 @@ namespace Spel
                 if (roomNr == 1) //livingroom
                 {
                     livingRoom.roomEnter();
+                    Console.Write("Choice: ");
+                    choice = Console.ReadLine();
+                    roomNr = Choice.Made(choice, roomNr, livingRoom);
+                }
+                if (roomNr == 2)
+                {
+                    office.roomEnter();
                     Console.ReadLine();
-
                 }
 
             }
-
-
-
-
-
-
-
-
         }
     }
 }
