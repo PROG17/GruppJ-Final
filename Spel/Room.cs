@@ -21,7 +21,7 @@ namespace Spel
             description = _dscrtp;
         }
 
-        public void GetRoomDescription()
+        public void GetRoomDescription()//När någon använder look. 
         {
             Console.WriteLine(description);
             Console.Write("you can:");
@@ -36,19 +36,19 @@ namespace Spel
             }
         }
 
-        public void RoomEntered()
+        public void RoomEntered()// i princip samma sak fast här kan vi lägga till en if- för att se om det är första gången i rummet. Då kan det förenklat stå "you are back in the kitchen".
         {
 
             Console.WriteLine("You are in the " + name);
             Console.WriteLine(description);
             Console.Write("you can:");
-            foreach (var choice in avaliblechoices)
+            foreach (var choice in avaliblechoices)//skriver ut hållen man kan gå åt som vi initialiserar i program.cs (på detta sätt kan man bygga ett helt nytt spel på vårat skelett om man vill)
             {
                 Console.Write(choice);
 
             }
 
-            Console.Write(" Or interact with: ");
+            Console.Write(" Or interact with: ");//skriver ut vilka prylar som finns i rummet.
             foreach (var item in RoomInventory)
             {
 
