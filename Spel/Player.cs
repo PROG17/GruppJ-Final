@@ -14,6 +14,7 @@ namespace Spel
         public Player(string _name)
         {
             name = _name;
+            
         }
     }
 }
