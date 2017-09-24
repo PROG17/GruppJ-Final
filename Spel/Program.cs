@@ -14,13 +14,14 @@ namespace Spel
         {
             Intro.PlayIntro();
             int roomNr = 1;
+            string choice ="";
 
-            var livingRoom = new Room("You are in the living room.\n " +
-            "The living room is spacious with a large leather sofa in middle of the room. " +
+            var livingRoom = new Room("You are in the livingroom.\n" +
+            "The living room is spacious with a large leather sofa in middle of the room." +
             "In front of the sofa is a coffee table with a fruit bowl and a magazine on. In front of the coffee table is a black flatscreen TV." +
             "Along the right side is an antique drawer in dark wood with a lamp on. " +
-            "There are three possible exits from the Living Room. One door leads to what looks like an office. Next leads to the " +
-            "dining room. The third door, which is closed, has a sign that says \"Bathroom\" on it.", "Living room",1);
+            "There are three possible exits from the Living Room. West: One door leads to what looks like an office. North: leads to the " +
+            "dining room. East: A closed door with a sign that says \"Bathroom\"", "Living room",1);
 
             var office = new Room("You are in the office.\n" +
                 "The office is quite small but it houses one desk with one big drawer and a stationary computer. There are two small windows wich allows the moonlight to " +
@@ -88,15 +89,25 @@ namespace Spel
                 "\nAlthough there is a well sorted wine cellar down here as well. " +
                 "\n\"Player\" spot a bottle of Chateau Margaux, one of the worlds most expensive bottles of wine!" +  /*Need corkskrew in kitchen :D */
                 "\nFar back in the cellar is an old bookshelf with lots of junk in it. Seems to only be junk down here?", "cellar", 9); //Key in Cigarrbox in bookshelf
-                                                                                                                               //Probably need more stuff to search down here...
+                                                                                                                                        //Probably need more stuff to search down here...
 
 
 
 
-            
+            bool game = true;
+            //game
+            while (game)
+            {
+                if (roomNr == 1) //livingroom
+                {
+                    livingRoom.roomEnter();
+                    Console.ReadLine();
 
-           
-            
+                }
+
+            }
+
+
 
 
 
