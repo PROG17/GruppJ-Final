@@ -10,7 +10,7 @@ namespace Spel
     {
         public string Description;
         private string Name;
-
+        private bool firstTime = true;
         public Room(string description, string name)
         {
             Description = description;
@@ -20,6 +20,19 @@ namespace Spel
         public void getDescription()
         {
             Console.WriteLine(Description);
+        }
+
+        public void roomEnter()
+        {
+            if (firstTime)
+            {
+                Console.WriteLine(Description);
+                firstTime = false;
+            }
+            else
+            {
+                Console.WriteLine("You are back in the " + Name);
+            }
         }
     }
 }
