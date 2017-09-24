@@ -16,5 +16,10 @@ namespace Spel
             Description = description;
             Name = name;
         }
+
+        public void getDescription()
+        {
+            Console.WriteLine(Description);
+        }
     }
 }
