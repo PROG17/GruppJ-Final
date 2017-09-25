@@ -168,7 +168,7 @@ namespace Spel
                         switch (inputAction)
                         {
                             case "BACK":
-                                roomNr = 1;
+                                roomNr = 0;
                                 break;
                             default:
                                 Console.WriteLine("Not a valid move.");
