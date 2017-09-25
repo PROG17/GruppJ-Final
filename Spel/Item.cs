@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Spel
 {
-    class Item
+    public class Item
     {
 
         //instansvariabler 

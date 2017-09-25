@@ -18,15 +18,15 @@ namespace Spel
             string inputAction = "";
 
             //init of player 
-            var gustav = new Player("Gustav");//tillfälligt namn. ska bytas ut mot vad användaren anger.
+            var user = new Player("Gustav");//tillfälligt namn. ska bytas ut mot vad användaren anger.
 
             //inits of items Här skapas items. Det är bara att lägga till items här. 
             var key = new Item("Key", "A rusty old key");
             var flashlight = new Item("Flashlight", "A flashligt. I´t doesn't have any batteries.");
 
             //inits of rooms Här skapas rummen. Dom får de items dom ska ha i sin inventory och möjliga valen som inte används förutom att dom skrivs ut 
-            
-            var room0 = new Room("Living room", 
+
+            var room0 = new Room("Living room",
                 "\nThe living room is spacious with a large leather sofa in middle of the room. " +
                 "\nIn front of the sofa is a coffee table with a fruit bowl and a magazine on, and in front of " +
                 "\nthe coffee table is a black flatscreen TV." +
@@ -39,12 +39,24 @@ namespace Spel
             room0.avaliblechoices.Add(" Enter Bathroom or");
             room0.avaliblechoices.Add(" Enter Office");
 
-            var room1 = new Room("Office", "You are standing in an office. ");
-            room1.avaliblechoices.Add(" Go Back");
+            var room1 = new Room("Office", 
+                "The office is quite small but it houses one desk with one big drawer with " +
+                "\na stationary computer.There are two small windows wich allows the moonlight to " +
+                "\nlight up the room enough to make it possible to orientate without a lamp. " +
+                "\nThe walls contains some motivational posters and a big picture in a black frame. " +
+                "\nJust left of the entrance to the office is a big grey safe with a key lock. " +
+                "\n\"Player\" may only enter the living room from the office");
+            room1.avaliblechoices.Add(" Enter Living room");
             room1.RoomInventory.Add(key);
 
-            var room2 = new Room("Bathroom", "You are standing in a bathroom. ");
-            room2.avaliblechoices.Add(" Go Back");
+            var room2 = new Room("Bathroom", 
+                "This is a very small bathroom, espacially considered the size of the house." +
+                "\nThe bathroom just contains a small bathtub, a sink and a cabinet." +
+                "\nThe floor and walls are all in tiles. The floor is a mix of" +
+                "\n black and white tiles, like a chessboard, and the walls are completely white. " +
+                "\nThere is a small window close to the roof and the moonlight is shining straight through the window allowing \"Player\" to see." +
+                "\"Player\" may only enter the living room from the bathroom");
+            room2.avaliblechoices.Add(" Enter Living room");
 
             //Rooms added to list. Här hamnar rummen i en lista för att kunna utdelas och intrageras med genom en variabel (roomNr)
             List<Room> roomList = new List<Room>();
@@ -73,14 +85,14 @@ namespace Spel
                 if (input == "MY INVENTORY")//man kan alltid kolla sin inventory.
                 {
                     Console.Write("Your Items: ");
-                    foreach (var item in gustav.playerInventory)
+                    foreach (var item in user.playerInventory)
                     {
                         item.PrintName();
                         Console.Write(" - ");
                         item.GetDescription();
 
                     }
-                    int inven = 3 - gustav.playerInventory.Count; //Skriver ut hur mycket plats du har kvar av dina tre platser.
+                    int inven = 3 - user.playerInventory.Count; //Skriver ut hur mycket plats du har kvar av dina tre platser.
                     Console.WriteLine("You have " + inven + " inventory slots left");
                     input = Console.ReadLine();
                 }
@@ -91,7 +103,7 @@ namespace Spel
                         string temp = roomList[roomNr].RoomInventory[i].GetName().ToUpper();//Varje sak i roominventory kör sin getname. Finns det något som heter det vi försökte plocka upp? 
                         if (temp == inputAction)//om returnerat name är samma som det vi försökt plocka upp så ja!
                         {
-                            gustav.playerInventory.Add(roomList[roomNr].RoomInventory[i]);//lägger till saken i players inventory
+                            user.playerInventory.Add(roomList[roomNr].RoomInventory[i]);//lägger till saken i players inventory
                             roomList[roomNr].RoomInventory.RemoveAt(i);//tar bort saken ur rummets inventory
                             Console.WriteLine("you picked up the " + temp + ".");
                             break;
@@ -105,14 +117,14 @@ namespace Spel
                 if (inputType == "DROP")// här är samma som ovan fast omvänd. Vi droppar, Om saken finns lämnar den player inventory och hamnar i rummet vi är i.
                 {
 
-                    for (int i = 0; i < gustav.playerInventory.Count; i++)//sök igenom rummets inventory
+                    for (int i = 0; i < user.playerInventory.Count; i++)//sök igenom rummets inventory
                     {
-                        string temp = gustav.playerInventory[i].GetName().ToUpper();//Varje sak i roominventory kör sin getname 
+                        string temp = user.playerInventory[i].GetName().ToUpper();//Varje sak i roominventory kör sin getname 
 
                         if (temp == inputAction)//om returnerat name är samma som det vi försökt droppa 
                         {
-                            roomList[roomNr].RoomInventory.Add(gustav.playerInventory[i]);
-                            gustav.playerInventory.RemoveAt(i);
+                            roomList[roomNr].RoomInventory.Add(user.playerInventory[i]);
+                            user.playerInventory.RemoveAt(i);
                             Console.WriteLine("you dropped the " + temp + ".");
                             Console.ReadLine();
                             break;
@@ -147,7 +159,6 @@ namespace Spel
                                 break;
                         }
                     }
-
                 }
 
                 else if (roomNr == 1)
