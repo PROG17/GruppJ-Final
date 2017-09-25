@@ -55,12 +55,15 @@ namespace Sudoku
                 
             }
         }
+
+        private int UNASSIGNED = 0;
         public void Solve()
         {
             bool solved = false;
-            int x = 0;
+            int noHit = 0;
             while (solved == false)
             {
+               
                 solved = true;
                 for (int i = 0; i < 9; i++)
                 {
@@ -68,16 +71,18 @@ namespace Sudoku
                     {
                         if (board[i, j] == 0)  //Om nuvarande cell innehåller värdet 0 så:
                         {
+                            noHit = 0;
                             solved = false;
                             board[i,j] = Search(i, j); //Anropa metod som tilldelar cellen sitt logiskt möjliga värde
-
+                            if (board[i, j] != 0) noHit = board[i, j];
                         }
                         
                     }
-                    Thread.Sleep(250);
                     Console.Clear();
                     DisplayBoard();
-                }   
+                    Thread.Sleep(50);
+                }
+                if (noHit == 0) {SolveSudoku(board); }
             }
             Console.Clear();
             Console.WriteLine("\nSolved!\n");
@@ -174,6 +179,119 @@ namespace Sudoku
             else
                 
             return 0;
+        }
+        bool SolveSudoku(int[,] board)
+        {
+            do
+            {
+                for (int row = 0; row < 9; row++)
+                {
+                    for (int col = 0; col < 9; col++)
+                    {
+                        if (!FindUnassignedLocation(board, row, col))
+                            return true; // Brädet fullt!
+
+                        if (CurrentUnassigned(board, row, col))
+                        {
+                            for (int val = 1; val <= 9; val++) // 1-9
+                            {
+                                if (NoConflicts(row, col, val, board) == true) //Om # är möjlig
+                                {
+
+                                    board[row, col] = val;  //Försök sätta ut # 
+
+                                    if (board[row, col] != 0)
+                                    {
+                                        if (SolveSudoku(board)) return true;
+                                    }
+                                    board[row, col] = UNASSIGNED; //Ta bort och försök igen
+
+
+                                }
+
+                            }
+                            if (board[row, col] == UNASSIGNED) return false;
+                        }
+                    }
+
+                    Console.Clear();
+                    DisplayBoard();
+                    Thread.Sleep(50);
+                }
+
+                return false;//Aktiverar Backtracking
+            } while (true);
+
+
+
+
+        }
+        public bool FindUnassignedLocation(int[,] board, int row, int col) //Om return=True så hittade den en Nolla
+        {
+            for (int i = 0; i < 9; i++)
+            {
+                for (int j = 0; j < 9; j++)
+                {
+                    if (board[i, j] == 0) return true;
+                }
+            }
+            return false;
+        }
+        public bool CurrentUnassigned(int[,] board, int row, int col)
+        {
+            if (board[row, col] == UNASSIGNED) return true;
+            return false;
+        }
+
+        static bool CheckRow(int row, int val, int[,] arr)
+        {
+            for (int i = 0; i < 9; i++)
+            {
+                if (arr[row, i] == val)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+        static bool CheckCol(int col, int val, int[,] arr)
+        {
+            for (int i = 0; i < 9; i++)
+            {
+                if (arr[i, col] == val)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+        static bool CheckBox(int row, int col, int val, int[,] arr)
+        {
+            row = (row / 3) * 3;
+            col = (col / 3) * 3;
+            int colreset = col;
+
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 3; j++)
+                {
+                    if (arr[row, col] == val)
+                    {
+                        return false;
+                    }
+                    col++;
+                }
+                row++;
+                col = colreset;
+            }
+            return true;
+        }
+        static bool NoConflicts(int row, int col, int val, int[,] arr)
+        {
+            if (!CheckRow(row, val, arr)) return false;
+            if (!CheckCol(col, val, arr)) return false;
+            if (!CheckBox(row, col, val, arr)) return false;
+            return true;
         }
     }
 }

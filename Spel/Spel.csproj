@@ -44,7 +44,7 @@
   <ItemGroup>
     <Compile Include="Intro.cs" />
     <Compile Include="Item.cs" />
-    <Compile Include="Objects.cs" />
+    <Compile Include="Föremål.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
