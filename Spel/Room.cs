@@ -11,14 +11,14 @@ namespace Spel
         public string Description;
         private string Name;
         private bool firstTime = true;
-        private int roomNr;
+        
 
         //constructor
-        public Room(string description, string name, int roomnr)
+        public Room(string description, string name)
         {
             Description = description;
             Name = name;
-            this.roomNr = roomnr;
+            
         }
 
         public void getDescription()

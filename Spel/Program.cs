@@ -64,7 +64,7 @@ namespace Spel
             Room backyard = new Room(
                 "The backyard is huge. It has a perfectly cut lawn with an apple tree " +
                 "\ngrowing in the left side of the backyard, seems to be Granny Smith but it's hard to tell from such a long distance. " +
-                "\nStraight ahead you see a barbecue grill and a picknick bench. Alongside the house wall there is a flowerbed " +
+                "\nStraight ahead you see a big barbecue grill. Alongside the house wall there is a flowerbed " +
                 "\nwith some roses and tulips. The flowerbed is beautifully framed with some fist sized rocks." +
                 "\nAfter a few moments \"Player\" can hear the sound of barking and spot a huge guard dog \nthat shows obvious signs of agression towards \"Player\", " +
                 "\n\"Player\" must do something quickly!" +
@@ -99,7 +99,7 @@ namespace Spel
             //=============================================================================================================================================
 
             //Sofa, Fruit Bowl, Magazine, DrawerLR, TV, Lamp, DrawerOFFICE, Camputer, WindowOFF, Picture, Frame, Bathtub, 
-            //Sink, Cabinet, Table, Plants, Fridge, Stove, Freezer, WindowKITCHEN, Apple Tree/Tree, Grill, Bench, Roses, Tulips,
+            //Sink, Cabinet, Table, Plants, Fridge, Stove, Freezer, WindowKITCHEN, Apple Tree/Tree, Grill, Roses, Tulips,
             //Mirror, Drawer, Alarmclock, Bookshelf
 
             var sofa = new Föremål("Sofa", "A large sofa in black leather. Seats 4.");
@@ -118,11 +118,22 @@ namespace Spel
             var sink = new Föremål("Sink", "A modern, square-ish sink.");
             var cabinet = new Föremål("Cabinet", "A bathroom cabinet with a mirror.");
             var table = new Föremål("Table","A large Dining Room table.");
-            var plant = new Föremål("Plant", "Plats with green leaves. No flowers, just leaves.");
+            var plant = new Föremål("Plant", "Plants with green leaves. No flowers, just leaves.");
             var fridge = new Föremål("Fridge", "A big modern fridge in brushed steel. Oh! It has an ice maker! Fancy..!");
             var freezer = new Föremål("Freezer","A big modern freezer in brushed steel.");
             var stove = new Föremål("Stove", "A thin induction hob on top of the kitchen counter.");
             var windowKITCHEN = new Föremål("Kitchen Window", "A closed window with a view to the backyard.");
+            var appletree = new Föremål("Apple Tree", "The apple tree is to far away to inspect and you " +
+                                                      "\nprobably shouldn't head over there since the angry dog is here.");
+            var grill = new Föremål("Grill", "A family sized gas grill. It's a Weber and looks like it could be used right now.");
+            var roses = new Föremål("Roses","beautiful red roses");
+            var tulips = new Föremål("Tulips","Tulips in various colors.");
+            var mirror = new Föremål("Mirror", "A big mirror. You see yourself");
+            var drawerBEDROOM = new Föremål("Bedroom Drawer","A bedside table drawer. Looks like it can be opened.");
+            var bookshelf = new Föremål("Bookshelf","A white bookshelf with loads of junk in it. Mostly books but also " +
+                                                    "\na few decorative items. Player spots something shiny behind one of the books." +
+                                                    "\nLooks like a key.");
+            var pootable = new Föremål("Pooltable","An old worn out pooltable. There are no balls or cues.");
 
 
 
