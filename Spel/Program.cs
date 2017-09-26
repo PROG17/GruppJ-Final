@@ -93,8 +93,7 @@ namespace Spel
                 "\nAlthough there is a well sorted wine cellar down here as well. " +
                 "\n\"Player\" spot a bottle of Chateau Margaux, one of the worlds most expensive bottles of wine!" +  /*Need corkskrew in kitchen :D (Item) */
                 "\nFar back in the cellar is an old bookshelf with lots of junk in it and" +
-                "\nin the middle of the cellar is a worned out pooltable. Seems to be mostly junk down here?", ""); //Key in Cigarrbox in bookshelf
-                                                                                                                    //Probably need more stuff to search down here...
+                "\nin the middle of the cellar is a worned out pooltable. Seems to be mostly junk down here?", ""); 
 
             //=============================================================================================================================================
 
