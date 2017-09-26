@@ -19,10 +19,12 @@ namespace Spel
             /*Rooms
             ============================================================================================================================================*/
             Room livingRoom = new Room("The living room is spacious with a large leather sofa in middle of the room. " +
-                                       "In front of the sofa is a coffee table with a fruit bowl and a magazine on. In front of the coffee table is a black flatscreen TV." +
-                                       "Along the right side is an antique drawer in dark wood with a lamp on. " +
-                                       "There are three possible exits from the Living Room. One door leads to what looks like an office. Next leads to the " +
-                                       "dining room. The third door, which is closed, has a sign that says \"Bathroom\" on it.", "Living room");
+                                       "\nIn front of the sofa is a coffee table with a fruit bowl and a magazine on. " +
+                                       "\nIn front of the coffee table is a black flatscreen TV." +
+                                       "\nAlong the right side is an antique drawer in dark wood with a lamp on. " +
+                                       "\nThere are three possible exits from the Living Room. " +
+                                       "\nOne door leads to what looks like an office. Next leads to the dining room. " +
+                                       "\nThe third door has a sign that says \"Bathroom\" on it.", "Living room");
             
             Room office = new Room("The office is quite small but it houses one desk " +
                                    "\nwith one big drawer and a stationary computer. " +
@@ -40,66 +42,64 @@ namespace Spel
                                      "\nthrough the window allowing \"Player\" to see." +
                                      "\"Player\" may only enter the living room from the bathroom", "Bathroom");
             
-            Room diningRoom1 = new Room(   //Innan Bedroom är upplåst
-                "The dining room is pretty dark since it is placed in the center of the house, only a little moonlight finds its way to this room so \"Player\" " +
-                "can only see the contours of this rooms objects. There seems to be a large dining room tabel in the middle of the room with eight chairs around it. " +
-                "There appear to be some shelves in the corners of the room with green plants on them. Not much interesting that \"Player\" can see in this room.\n" +
-                "There seem to be 4 possible exits from this room. To the kitchen, the livingroom, the cellar witch seems to be pitch black " +
-                "and then there is a closed door which probably lead to the bedroom.","Dining Room");
+            Room diningRoom1 = new Room("The dining room is pretty dark since it is placed in the center of the house, only a little " + //Innan Bedroom är upplåst
+                                        "\nmoonlight finds its way to this room so \"Player\" can only see the contours of" +
+                                        "\n this rooms objects. There seems to be a large dining room tabel in the middle of the room " +
+                                        "\nwith eight chairs around it. There appear to be some shelves in the corners of the room with " +
+                                        "\ngreen plants on them. Not much interesting that \"Player\" can see in this room.\n" +
+                                        "\nThere seem to be 4 possible exits from this room. To the kitchen, the livingroom, " +
+                                        "\nthe cellar witch seems to be pitch black and then there is a closed door which " +
+                                        "\nprobably lead to the bedroom.","Dining Room");
             
-            Room diningRoom2 = new Room(  //Efter Bedroom är upplåst
-                "The dining room is pretty dark since it is placed in the center of the house, only a little moonlight finds its way to this room so \"Player\" " +
-                "can only see the contours of the objects in this room. There seems to be a large dining room tabel in the middle of the room with eight chairs around it. " +
-                "There appear to be some shelves in the corners of the room with green plants on them. Not much interesting that \"Player\" can see in this room.\n" +
-                "There is 4 possible exits from this room. To the kitchen, the livingroom, the cellar witch seems to be pitch black since it's underground " +
-                "and the bedroom.", "Dining Room",8);
+            Room diningRoom2 = new Room("The dining room is pretty dark since it is placed in the center of the house, only a little " + //Efter Bedroom är upplåst
+                                        "\nmoonlight finds its way to this room so \"Player\" can only see the contours of" +
+                                        "\n this rooms objects. There seems to be a large dining room tabel in the middle of the room " +
+                                        "\nwith eight chairs around it. There appear to be some shelves in the corners of the room with " +
+                                        "\ngreen plants on them. Not much interesting that \"Player\" can see in this room.\n" +
+                                        "\nThere seem to be 4 possible exits from this room. To the kitchen, the livingroom, " +
+                                        "\nthe cellar, witch seems to be pitch black, and the bedroom.", "Dining Room");
 
-            Room kitchen = new Room(
-                "The kitchen is huge! On the left side is a big freezer and an equally big fridge, seems like they are brand new. Centered in the kitchen is a " +
-                "lovely kitchen island with an integrated stove. All of the kitchen counters are made out of white marmor. All of the kitchen is dekorated with fresh " +
-                "spices and herbs in little pots. Seems like the owner likes to spend time in the kitchen since the he or she seems to have put a lot of effort in dekorating " +
-                "the kitchen. From the kitchen window \"Player\" can see a fenced backyard.\n" +
-                "\"Player\" may only enter the dining room from the kitchen.", "Kitchen"); //Window is Item here as well
+            Room kitchen = new Room("The kitchen is huge! On the left side is a big freezer and an equally big fridge, seems like " +
+                                    "\nthey are brand new. Centered in the kitchen is a lovely kitchen island with an integrated stove. " +
+                                    "\nAll of the kitchen counters are made out of white marmor. All of the kitchen is dekorated with fresh " +
+                                    "\nspices and herbs in little pots. Seems like the owner likes to spend time in the kitchen since he or she " +
+                                    "\nseems to have put a lot of effort in dekorating the kitchen. From the kitchen window \"Player\" can " +
+                                    "\nsee a fenced backyard. \"Player\" may only enter the dining room from the kitchen.", "Kitchen"); //Window is Item here as well
             
-            Room backyard = new Room(
-                "The backyard is huge. It has a perfectly cut lawn with an apple tree " +
-                "\ngrowing in the left side of the backyard, seems to be Granny Smith but it's hard to tell from such a long distance. " +
-                "\nStraight ahead you see a big barbecue grill. Alongside the house wall there is a flowerbed " +
-                "\nwith some roses and tulips. The flowerbed is beautifully framed with some fist sized rocks." +
-                "\nAfter a few moments \"Player\" can hear the sound of barking and spot a huge guard dog \nthat shows obvious signs of agression towards \"Player\", " +
-                "\n\"Player\" must do something quickly!" +
-                "\nThe gate to the front of the house is shut, probably locked." +
-                "\nFrom the backyard \"player\" can see a window to the kitchen and a window to the bedroom, although it is closed. \n","Backyard"); //Stone=Item
+            Room backyard = new Room("The backyard is huge. It has a perfectly cut lawn with an apple tree " +
+                                    "\ngrowing in the left side of the backyard, seems to be Granny Smith but it's hard to tell from such a long distance. " +
+                                    "\nStraight ahead you see a big barbecue grill. Alongside the house wall there is a flowerbed " +
+                                    "\nwith some roses and tulips. The flowerbed is beautifully framed with some fist sized rocks." +
+                                    "\nAfter a few moments \"Player\" can hear the sound of barking and spot a huge guard dog \nthat shows obvious signs of agression towards \"Player\", " +
+                                    "\n\"Player\" must do something quickly!" +
+                                    "\nThe gate to the front of the house is shut, probably locked." +
+                                    "\nFrom the backyard \"player\" can see a window to the kitchen and a window to the bedroom, although it is closed. \n","Backyard"); //Stone=Item
             
-            Room bedroom = new Room(
-                "The bedroom pretty compact. There is not alot of spare room in here. " +
-                "\nThe room is beautifully decorated with long curtains in dark, cozy colors. There is a tall " +
-                "\nhuman sized mirror beside the bedroom drawer which reflect the moonlight, making it pretty easy do orientate in the bedroom." +
-                "\nThere is a Queen sized bed with bedside tables at each side of the bed. " +
-                "\nEach of the tables has a lamp, but only one of them has an alarmclock and a drawer." +
-                "\n The owner must be living alone. " +
-                "\n From inside the bedroom it is posible to unlock the door to the dining room. " +
-                "\n\"Player\" can also see into the backyard through the window. ","");
+            Room bedroom = new Room("The bedroom pretty compact. There is not alot of spare room in here. " +
+                                    "\nThe room is beautifully decorated with long curtains in dark, cozy colors. There is a tall " +
+                                    "\nhuman sized mirror beside the bedroom drawer which reflect the moonlight, making it pretty easy do orientate in the bedroom." +
+                                    "\nThere is a Queen sized bed with bedside tables at each side of the bed. " +
+                                    "\nEach of the tables has a lamp, but only one of them has an alarmclock and a drawer." +
+                                    "\n The owner must be living alone. " +
+                                    "\n From inside the bedroom it is posible to unlock the door to the dining room. " +
+                                    "\n\"Player\" can also see into the backyard through the window. ","");
             
-            Room darkCellar = new Room(
-                "The cellar is pitch black and \"Player\" can't see anything. " +
-                "\n\"Player\" trips and fall down the stairs hurting his ankle pretty bad. " +
-                "\nOh Shit! The ankle is broken! Moving around will take twice as long now." +
-                "\n\"Player\" can't see anything. Only available exit is back to dining room.","Cellar");
+            Room darkCellar = new Room("The cellar is pitch black and \"Player\" can't see anything. " +
+                                        "\n\"Player\" trips and fall down the stairs hurting his ankle pretty bad. " +
+                                        "\nOh Shit! The ankle is broken! Moving around will take twice as long now." +
+                                        "\n\"Player\" can't see anything. Only available exit is back to dining room.","Cellar");
 
-            Room lightCellar = new Room(
-                "The flashlight now reveals the cellar. " +
-                "\nThe house owner obviously use this room as storage. There's loads of things down here. Mostly junk..." +
-                "\nAlthough there is a well sorted wine cellar down here as well. " +
-                "\n\"Player\" spot a bottle of Chateau Margaux, one of the worlds most expensive bottles of wine!" +  /*Need corkskrew in kitchen :D (Item) */
-                "\nFar back in the cellar is an old bookshelf with lots of junk in it and" +
-                "\nin the middle of the cellar is a worned out pooltable. Seems to be mostly junk down here?", ""); 
+            Room lightCellar = new Room("The flashlight now reveals the cellar. " +
+                                        "\nThe house owner obviously use this room as storage. There's loads of things down here. Mostly junk..." +
+                                        "\nAlthough there is a well sorted wine cellar down here as well. " +
+                                        "\n\"Player\" spot a bottle of Chateau Margaux, one of the worlds most expensive bottles of wine!" +  /*Need corkskrew in kitchen :D (Item) */
+                                        "\nFar back in the cellar is an old bookshelf with lots of junk in it and" +
+                                        "\nin the middle of the cellar is a worned out pooltable. Seems to be mostly junk down here?", "");
 
-            //=============================================================================================================================================
+            //Föremål
+            //======================================================================================================================================================
 
-            //Sofa, Fruit Bowl, Magazine, DrawerLR, TV, Lamp, DrawerOFFICE, Camputer, WindowOFF, Picture, Frame, Bathtub, 
-            //Sink, Cabinet, Table, Plants, Fridge, Stove, Freezer, WindowKITCHEN, Apple Tree/Tree, Grill, Roses, Tulips,
-            //Mirror, Drawer, Alarmclock, Bookshelf
+
 
             var sofa = new Föremål("Sofa", "A large sofa in black leather. Seats 4.");
             var fruitBowl = new Föremål("Fruit Bowl", "A fruit bowl containing some fruit.");
@@ -133,9 +133,9 @@ namespace Spel
                                                     "\na few decorative items. Player spots something shiny behind one of the books." +
                                                     "\nLooks like a key.");
             var pootable = new Föremål("Pooltable","An old worn out pooltable. There are no balls or cues.");
+            //======================================================================================================================================================
 
-
-
+            
 
             bool game = true;
             //game
