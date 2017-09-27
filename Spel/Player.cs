@@ -9,12 +9,11 @@ namespace Spel
     class Player
     {
         private string name = "";
-        public List<Item> PlayerInventory = new List<Item>();
+        public List<Item> playerInventory = new List<Item>();
 
-        public Player(string _name)
+        public Player(string name)
         {
-            name = _name;
-            
+            this.name = name;
         }
     }
 }

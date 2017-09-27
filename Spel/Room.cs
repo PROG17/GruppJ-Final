@@ -6,39 +6,59 @@ using System.Threading.Tasks;
 
 namespace Spel
 {
-    public class Room
+    class Room
     {
-        public string Description;
-        private string Name;
-        private bool firstTime = true;
-        private int roomNr;
 
-        //constructor
-        public Room(string description, string name, int roomnr)
+        private string name = "";
+        private string description = "";
+        private bool firstVisist = true;
+        public List<Item> RoomInventory = new List<Item>();//Saker i rummet
+        public List<string> avaliblechoices = new List<string>();
+
+        public Room(string _name, string _dscrtp)
         {
-            Description = description;
-            Name = name;
-            this.roomNr = roomnr;
+            name = _name;
+            description = _dscrtp;
         }
 
-        public void getDescription()
+        public void GetRoomDescription()//När någon använder look. 
         {
-            Console.Clear();
-            Console.WriteLine(Description);
-        }
-
-        public void roomEnter()
-        {
-            if (firstTime)
+            Console.WriteLine(description);
+            Console.Write("you can:");
+            foreach (var choice in avaliblechoices)
             {
-                Console.Clear();
-                Console.WriteLine(Description);
-                firstTime = false;
+                Console.Write(choice);
+
             }
-            else
-            {   Console.Clear();
-                Console.WriteLine("You are back in the " + Name);
+            foreach (var item in RoomInventory)
+            {
+                item.PrintName();
             }
         }
+
+        public void RoomEntered()// i princip samma sak fast här kan vi lägga till en if- för att se om det är första gången i rummet. Då kan det förenklat stå "you are back in the kitchen".
+        {
+
+            Console.WriteLine("You are in the " + name);
+            Console.WriteLine(description);
+            Console.Write("you can:");
+            foreach (var choice in avaliblechoices)//skriver ut hållen man kan gå åt som vi initialiserar i program.cs (på detta sätt kan man bygga ett helt nytt spel på vårat skelett om man vill)
+            {
+                Console.Write(choice);
+
+            }
+
+            Console.Write(" Or interact with: ");//skriver ut vilka prylar som finns i rummet.
+            foreach (var item in RoomInventory)
+            {
+
+                item.PrintName();
+                Console.Write(" ");
+
+            }
+
+        }
+
     }
+
 }

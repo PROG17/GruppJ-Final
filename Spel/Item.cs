@@ -6,15 +6,18 @@ using System.Threading.Tasks;
 
 namespace Spel
 {
-    class Item
+    public class Item
     {
-        private string name = "";
-        private string description = "";
 
-        public Item(string _name, string _description)
+        //instansvariabler 
+        private string name = "";
+        private readonly string description = "";
+
+        //constructor
+        public Item(string _name, string _dscrpt)
         {
             name = _name;
-            description = _description;
+            description = _dscrpt;
         }
 
         public void GetDescription()
@@ -22,5 +25,13 @@ namespace Spel
             Console.WriteLine(description);
         }
 
+        public void PrintName()
+        {
+            Console.Write(name);
+        }
+        public string GetName()
+        {
+            return name;
+        }
     }
 }
