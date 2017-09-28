@@ -15,7 +15,7 @@ namespace Spel
 
         static void Main(string[] args)
         {
-            Intro.PlayIntro();
+            //Intro.PlayIntro();
             var roomNr = 0;
 
             
@@ -105,15 +105,15 @@ namespace Spel
 
 
             var sofa = new Föremål("Sofa", "A large sofa in black leather. Seats 4.");
-            var fruitBowl = new Föremål("Fruit Bowl", "A fruit bowl containing some fruit.");
+            //var fruitBowl = new Föremål("Fruit Bowl", "A fruit bowl containing some fruit."); tar bort tillfälligt då den skapar problem pga namnet är två ord.
             var magazine = new Föremål("Magazine", "A home decorating magazine.");
-            var drawerLR = new Föremål("Living Room Drawer", "A big antique drawer in dark wood. Could possibly be worth quite a lot of money.");
+            var drawerLR = new Föremål("Drawer", "A big antique drawer in dark wood. Could possibly be worth quite a lot of money.");
             var tv = new Föremål("TV", "A big Samsung flatscreen TV. Probably around 47 inches.");
             var lamp = new Föremål("Lamp", "This lamp seems familiar. Player think it's from IKEA and is called \"Böja\". " +
                                            "\n*Player makes a quick google-search*, Nope, it was from MIO.");
-            var drawerOFFICE = new Föremål("Office Drawer", "A modern Office desk drawer.");
+            var drawerOFFICE = new Föremål("Drawer", "A modern Office desk drawer.");
             var computer = new Föremål("Computer", "A computer... Nothing special. Moving on!");
-            var windowOFFICE = new Föremål("Office Window", "The window can't be opened. Must get warm in here during the summer.");
+            var windowOFFICE = new Föremål("Window", "The window can't be opened. Must get warm in here during the summer.");
             var picture = new Föremål("Picture","A family photograph. Seems to be from a birthday party. Wonder if the house owner is on the picture...");
             var frame = new Föremål("Frame","Just a picture frame. How interesting can it be..?!");
             var bathtub = new Föremål("Bathtub", "A classic bathtub in porcelain");
@@ -144,6 +144,29 @@ namespace Spel
             var key = new Item("Key", "Its a key with the inscription 'safe' ");
             var rock = new Item("Rock", "Its a very throwable rock. It fits perfectly in your hand.");
 
+
+            //Init av prylar
+            //=========================================================================================================================================================
+
+            livingRoom.roomdecorations.Add(sofa);
+            livingRoom.roomdecorations.Add(tv);
+            livingRoom.roomdecorations.Add(drawerLR);
+            livingRoom.roomdecorations.Add(magazine);
+            livingRoom.roomdecorations.Add(lamp);
+
+            office.roomdecorations.Add(computer);
+            office.roomdecorations.Add(windowOFFICE);
+            office.roomdecorations.Add(drawerOFFICE);
+            office.roomdecorations.Add(frame);
+
+
+
+
+
+
+
+            //=============================================================================================================================================================
+
             var choice = "";
             bool game = true;
             //game
@@ -164,6 +187,14 @@ namespace Spel
                     choice = Console.ReadLine();
                     roomNr = Choice.Made(choice, roomNr, office);
                 }
+                if (roomNr == 2)
+                {
+                    bathroom.roomEnter();
+                    Console.Write("Choice: ");
+                    choice = Console.ReadLine();
+                    roomNr = Choice.Made(choice, roomNr, bathroom);
+                }
+
 
             }
         }

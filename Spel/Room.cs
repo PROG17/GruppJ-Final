@@ -35,7 +35,7 @@ namespace Spel
             {
                 Console.Clear();
                 Console.WriteLine(Description);
-                firstTime = false;
+                //firstTime = false;
             }
             else
             {   Console.Clear();

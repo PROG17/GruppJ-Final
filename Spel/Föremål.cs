@@ -21,6 +21,13 @@ namespace Spel
         {
             return Name;
         }
+
+        public void PrintDescription()
+        {
+            Console.WriteLine(Description);
+            
+        }
+
         
     }
 }
