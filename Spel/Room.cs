@@ -11,7 +11,9 @@ namespace Spel
         public string Description;
         private string Name;
         private bool firstTime = true;
-        
+        public List<Föremål> roomdecorations  = new List<Föremål>(); // saker man kan titta på.
+        public List<Item> roomInventory = new List<Item>(); //saker man kan plocka upp.
+
 
         //constructor
         public Room(string description, string name)
@@ -37,7 +39,7 @@ namespace Spel
             }
             else
             {   Console.Clear();
-                Console.WriteLine("You are back in the " + Name);
+                Console.WriteLine("You are in the " + Name);
             }
         }
     }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.CodeDom;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -15,6 +16,8 @@ namespace Spel
         static void Main(string[] args)
         {
             Intro.PlayIntro();
+            var roomNr = 0;
+
             
             /*Rooms
             ============================================================================================================================================*/
@@ -132,26 +135,34 @@ namespace Spel
             var bookshelf = new Föremål("Bookshelf","A white bookshelf with loads of junk in it. Mostly books but also " +
                                                     "\na few decorative items. Player spots something shiny behind one of the books." +
                                                     "\nLooks like a key.");
-            var pootable = new Föremål("Pooltable","An old worn out pooltable. There are no balls or cues.");
+            var pooltable = new Föremål("Pooltable","An old worn out pooltable. There are no balls or cues.");
             //======================================================================================================================================================
 
-            
+            //Items
+            //======================================================================================================================================================
+            var flashlight = new Item("Flashlight.", "It doesn't have any batteries.");
+            var key = new Item("Key", "Its a key with the inscription 'safe' ");
+            var rock = new Item("Rock", "Its a very throwable rock. It fits perfectly in your hand.");
 
+            var choice = "";
             bool game = true;
             //game
             while (game)
             {
-                if (roomNr == 1) //livingroom
+                if (roomNr == 0) //livingroom
                 {
                     livingRoom.roomEnter();
                     Console.Write("Choice: ");
                     choice = Console.ReadLine();
                     roomNr = Choice.Made(choice, roomNr, livingRoom);
+
                 }
-                if (roomNr == 2)
+                if (roomNr == 1)
                 {
                     office.roomEnter();
-                    Console.ReadLine();
+                    Console.Write("Choice: ");
+                    choice = Console.ReadLine();
+                    roomNr = Choice.Made(choice, roomNr, office);
                 }
 
             }
