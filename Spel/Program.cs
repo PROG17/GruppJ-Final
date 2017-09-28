@@ -3,6 +3,7 @@ using System.CodeDom;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -124,7 +125,7 @@ namespace Spel
             var fridge = new Föremål("Fridge", "A big modern fridge in brushed steel. Oh! It has an ice maker! Fancy..!");
             var freezer = new Föremål("Freezer","A big modern freezer in brushed steel.");
             var stove = new Föremål("Stove", "A thin induction hob on top of the kitchen counter.");
-            var windowKITCHEN = new Föremål("Kitchen Window", "A closed window with a view to the backyard.");
+            var windowKITCHEN = new Föremål("Window", "A closed window with a view to the backyard.");
             var appletree = new Föremål("Apple Tree", "The apple tree is to far away to inspect and you " +
                                                       "\nprobably shouldn't head over there since the angry dog is here.");
             var grill = new Föremål("Grill", "A family sized gas grill. It's a Weber and looks like it could be used right now.");
@@ -145,7 +146,7 @@ namespace Spel
             var rock = new Item("Rock", "Its a very throwable rock. It fits perfectly in your hand.");
 
 
-            //Init av prylar
+            //Init av prylar till rum
             //=========================================================================================================================================================
 
             livingRoom.roomdecorations.Add(sofa);
@@ -158,6 +159,20 @@ namespace Spel
             office.roomdecorations.Add(windowOFFICE);
             office.roomdecorations.Add(drawerOFFICE);
             office.roomdecorations.Add(frame);
+            office.roomdecorations.Add(picture);
+
+            bathroom.roomdecorations.Add(bathtub);
+            bathroom.roomdecorations.Add(sink);
+            bathroom.roomdecorations.Add(cabinet);
+
+            diningRoom1.roomdecorations.Add(table);
+            diningRoom1.roomdecorations.Add(plant);
+
+            kitchen.roomdecorations.Add(fridge);
+            kitchen.roomdecorations.Add(freezer);
+            kitchen.roomdecorations.Add(stove);
+            kitchen.roomdecorations.Add(windowKITCHEN);
+
 
 
 
@@ -180,23 +195,57 @@ namespace Spel
                     roomNr = Choice.Made(choice, roomNr, livingRoom);
 
                 }
-                if (roomNr == 1)
+                if (roomNr == 1)//office
                 {
                     office.roomEnter();
                     Console.Write("Choice: ");
                     choice = Console.ReadLine();
                     roomNr = Choice.Made(choice, roomNr, office);
                 }
-                if (roomNr == 2)
+                if (roomNr == 2)//bathroom
                 {
                     bathroom.roomEnter();
                     Console.Write("Choice: ");
                     choice = Console.ReadLine();
                     roomNr = Choice.Made(choice, roomNr, bathroom);
                 }
+                if (roomNr == 4)//diningroom
+                {
+                    diningRoom1.roomEnter();
+                    Console.Write("Choice: ");
+                    choice = Console.ReadLine();
+                    roomNr = Choice.Made(choice, roomNr, diningRoom1);
+                }
+                if (roomNr == 6)//diningroom
+                {
+                    kitchen.roomEnter();
+                    Console.Write("Choice: ");
+                    choice = Console.ReadLine();
+                    roomNr = Choice.Made(choice, roomNr, kitchen);
+                }
+                //Death in cellar.
+                if (roomNr == 20)
+                {
+                    Console.Clear();
+                    Console.WriteLine(@"You fell down the stairs and broke your neck. 
+You are so dead. 
+But since you are the bad guy in this story that's kinda OK...");
+                    Console.WriteLine(@"  ____   ____  ___ ___    ___       ___   __ __    ___  ____  
+ /    | /    ||   |   |  /  _]     /   \ |  |  |  /  _]|    \ 
+|   __||  o  || _   _ | /  [_     |     ||  |  | /  [_ |  D  )
+|  |  ||     ||  \_/  ||    _]    |  O  ||  |  ||    _]|    / 
+|  |_ ||  _  ||   |   ||   [_     |     ||  :  ||   [_ |    \ 
+|     ||  |  ||   |   ||     |    |     | \   / |     ||  .  \
+|___,_||__|__||___|___||_____|     \___/   \_/  |_____||__|\_|
+                                                              ");
+                    Console.Read();
+                    game = false;
+                }
 
 
             }
+ 
+            
         }
     }
 }
