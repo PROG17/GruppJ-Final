@@ -12,12 +12,14 @@ namespace Spel
         //instansvariabler 
         private string name = "";
         private readonly string description = "";
+        private string usables = "";
 
         //constructor
-        public Item(string _name, string _dscrpt)
+        public Item(string _name, string _dscrpt, string usable)
         {
             name = _name;
             description = _dscrpt;
+            usables = usable;
         }
 
         public void GetDescription()
@@ -33,5 +35,19 @@ namespace Spel
         {
             return name;
         }
+
+        public bool Usable(string itemSent)
+        {
+            if (itemSent == usables)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace Spel
 {
@@ -35,6 +36,17 @@ namespace Spel
             {
                 Console.Clear();
                 Console.WriteLine(Description);
+                if (roomInventory.Count >0 )
+                {
+                    Console.Write("There is a ");
+                    foreach (var item in roomInventory)
+                    {
+                        Console.Write(item.GetName());
+                       
+                    }
+                    Console.WriteLine(" in the " + Name + ".");
+                }
+                
                 //firstTime = false;
             }
             else

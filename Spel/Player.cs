@@ -15,5 +15,10 @@ namespace Spel
         {
             this.name = name;
         }
+
+        public void PlayerInventoryAdd(Item item)
+        {
+            playerInventory.Add(item);
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -10,12 +11,22 @@ namespace Spel
 {
     class Choice
     {
-        public static int Made(string choice, int rum, Room actual)
+        public static int Made(string choice, int rum, Room actual, Player user)
         {
             choice = choice.ToUpper();
             choice = choice.Trim();
             var choiceSplit = choice.Split(' ');
+            //single word choices
+            if (choice == "INVENTORY")
+            {
+                foreach (var item in user.playerInventory)
+                {
+                    Console.Clear();
+                    Console.WriteLine("Your inventory: \n" + item.GetName());
+                    Console.ReadKey();
 
+                }
+            }
             if (choice == "LOOK" && choiceSplit.Length == 1)
             {
                 actual.getDescription();
@@ -23,6 +34,7 @@ namespace Spel
                 Console.Read();
 
             }//Om man bara skriver look för att se sig om i rummet
+            //multiple word choices
             if (choiceSplit[0] == "LOOK" && choiceSplit.Length > 1)// om man tittar på en pryl.
             {
                 bool found = false;
@@ -48,8 +60,77 @@ namespace Spel
 
 
             }
+            if (choiceSplit[0] == "GET")
+            {
+                Console.WriteLine(choiceSplit[1]);
+                Console.ReadLine();
+                bool found = false;
+                foreach (var item in actual.roomInventory)//plocka upp saker
+                {
+                    var temp = item.GetName().ToUpper();
+                    if (choiceSplit[1] == temp)
+                    {
+                        user.PlayerInventoryAdd(item);
+                        actual.roomInventory.Remove(item);
+                        Console.WriteLine("you picked up " + item.GetName() + ".");
+                        Console.Read();
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found)
+                {
+                    Console.WriteLine("No such item.");
+                    Console.Read();
+                }
+            }
+            if (choiceSplit[0] == "DROP")
+            {
+                Console.WriteLine(choiceSplit[1]);
+                Console.ReadLine();
+                bool found = false;
+                foreach (var item in user.playerInventory) //droppa saker
+                {
+                    var temp = item.GetName().ToUpper();
+                    if (choiceSplit[1] == temp)
+                    {
+                        user.playerInventory.Remove(item);
+                        actual.roomInventory.Add(item);
+                        Console.WriteLine("you droped " + item.GetName() + ".");
+                        Console.Read();
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found)
+                {
+                    Console.WriteLine("No such item.");
+                    Console.Read();
+                }
+            }
+            if (choiceSplit[0] == "USE")
+            {
+               
+               
+                if (rum == 0)
+                {
+                    switch (choiceSplit[1])
+                    {
+                        case "DRAWER":
+                            rum = 15;
+                            break;
+
+                        default:
+                            Console.WriteLine("No such item.");
+                            break;
+
+                    }
+                }
+
+            }
 
 
+            //movement choices.
             //livingroom
             if (rum == 0)
             {
@@ -133,7 +214,30 @@ namespace Spel
             {
                 if (choiceSplit[0] == "GO")
                 {
-                    
+                    switch (choiceSplit[1])
+                    {
+                        case "LIVINGROOM":
+                            rum = 0;
+                            break;
+                        case "BACKYARD":
+                            rum = 7;
+                            break;
+                        default:
+                            Console.WriteLine("No such room to enter.");
+                            break;
+                    }
+                }
+            }
+
+            else if (rum == 15)
+            {
+
+                if (choiceSplit[0] == "GO")
+                {
+                    if (choiceSplit[1] == "LIVINGROOM" || choiceSplit[1] == "BACK")
+                    {
+                        rum = 0;
+                    }
                 }
             }
 

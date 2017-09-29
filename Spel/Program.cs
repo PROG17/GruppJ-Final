@@ -18,7 +18,9 @@ namespace Spel
         {
             //Intro.PlayIntro();
             var roomNr = 0;
-
+            Console.Write("Ange namn:");
+            string name = Console.ReadLine();
+            Player user = new Player(name);
             
             /*Rooms
             ============================================================================================================================================*/
@@ -68,7 +70,7 @@ namespace Spel
                                     "\nAll of the kitchen counters are made out of white marmor. All of the kitchen is dekorated with fresh " +
                                     "\nspices and herbs in little pots. Seems like the owner likes to spend time in the kitchen since he or she " +
                                     "\nseems to have put a lot of effort in dekorating the kitchen. From the kitchen window \"Player\" can " +
-                                    "\nsee a fenced backyard. \"Player\" may only enter the dining room from the kitchen.", "Kitchen"); //Window is Item here as well
+                                    "\nsee a fenced backyard. \"Player\" may  enter the diningroom or backyard through window from the kitchen.", "Kitchen"); //Window is Item here as well
             
             Room backyard = new Room("The backyard is huge. It has a perfectly cut lawn with an apple tree " +
                                     "\ngrowing in the left side of the backyard, seems to be Granny Smith but it's hard to tell from such a long distance. " +
@@ -99,6 +101,8 @@ namespace Spel
                                         "\n\"Player\" spot a bottle of Chateau Margaux, one of the worlds most expensive bottles of wine!" +  /*Need corkskrew in kitchen :D (Item) */
                                         "\nFar back in the cellar is an old bookshelf with lots of junk in it and" +
                                         "\nin the middle of the cellar is a worned out pooltable. Seems to be mostly junk down here?", "");
+            Room drawerLiRoom = new Room("You open the the drawer", "drawer");
+
 
             //Föremål
             //======================================================================================================================================================
@@ -130,7 +134,8 @@ namespace Spel
                                                       "\nprobably shouldn't head over there since the angry dog is here.");
             var grill = new Föremål("Grill", "A family sized gas grill. It's a Weber and looks like it could be used right now.");
             var roses = new Föremål("Roses","beautiful red roses");
-            var tulips = new Föremål("Tulips","Tulips in various colors.");
+            var tulips = new Föremål("Tulips", "Tulips in various colors.");
+            var windowBackyard = new Föremål("Window","The window leads to the bedroom");
             var mirror = new Föremål("Mirror", "A big mirror. You see yourself");
             var drawerBEDROOM = new Föremål("Bedroom Drawer","A bedside table drawer. Looks like it can be opened.");
             var bookshelf = new Föremål("Bookshelf","A white bookshelf with loads of junk in it. Mostly books but also " +
@@ -141,9 +146,9 @@ namespace Spel
 
             //Items
             //======================================================================================================================================================
-            var flashlight = new Item("Flashlight.", "It doesn't have any batteries.");
-            var key = new Item("Key", "Its a key with the inscription 'safe' ");
-            var rock = new Item("Rock", "Its a very throwable rock. It fits perfectly in your hand.");
+            var flashlightWoBatteries = new Item("Flashlight", "It doesn't have any batteries.", "Batteries");
+            var key = new Item("Key", "Its a key with the inscription 'safe' ", "Safe");
+            var rock = new Item("Rock", "Its a very throwable rock. It fits perfectly in your hand.","Window");
 
 
             //Init av prylar till rum
@@ -154,6 +159,8 @@ namespace Spel
             livingRoom.roomdecorations.Add(drawerLR);
             livingRoom.roomdecorations.Add(magazine);
             livingRoom.roomdecorations.Add(lamp);
+
+
 
             office.roomdecorations.Add(computer);
             office.roomdecorations.Add(windowOFFICE);
@@ -173,6 +180,15 @@ namespace Spel
             kitchen.roomdecorations.Add(stove);
             kitchen.roomdecorations.Add(windowKITCHEN);
 
+            backyard.roomdecorations.Add(tulips);
+            backyard.roomdecorations.Add(roses);
+            backyard.roomdecorations.Add(appletree);
+            backyard.roomdecorations.Add(grill);
+            backyard.roomdecorations.Add(windowBackyard);
+            backyard.roomInventory.Add(rock);
+
+            drawerLiRoom.roomInventory.Add(flashlightWoBatteries);
+            
 
 
 
@@ -192,7 +208,7 @@ namespace Spel
                     livingRoom.roomEnter();
                     Console.Write("Choice: ");
                     choice = Console.ReadLine();
-                    roomNr = Choice.Made(choice, roomNr, livingRoom);
+                    roomNr = Choice.Made(choice, roomNr, livingRoom,user);
 
                 }
                 if (roomNr == 1)//office
@@ -200,29 +216,46 @@ namespace Spel
                     office.roomEnter();
                     Console.Write("Choice: ");
                     choice = Console.ReadLine();
-                    roomNr = Choice.Made(choice, roomNr, office);
+                    roomNr = Choice.Made(choice, roomNr, office, user);
                 }
                 if (roomNr == 2)//bathroom
                 {
                     bathroom.roomEnter();
                     Console.Write("Choice: ");
                     choice = Console.ReadLine();
-                    roomNr = Choice.Made(choice, roomNr, bathroom);
+                    roomNr = Choice.Made(choice, roomNr, bathroom,user);
                 }
                 if (roomNr == 4)//diningroom
                 {
                     diningRoom1.roomEnter();
                     Console.Write("Choice: ");
                     choice = Console.ReadLine();
-                    roomNr = Choice.Made(choice, roomNr, diningRoom1);
+                    roomNr = Choice.Made(choice, roomNr, diningRoom1,user);
                 }
-                if (roomNr == 6)//diningroom
+                if (roomNr == 6)//KITCHEN
                 {
                     kitchen.roomEnter();
                     Console.Write("Choice: ");
                     choice = Console.ReadLine();
-                    roomNr = Choice.Made(choice, roomNr, kitchen);
+                    roomNr = Choice.Made(choice, roomNr, kitchen,user);
                 }
+                if (roomNr == 7)//backyard
+                {
+                    backyard.roomEnter();
+                    Console.Write("Choice: ");
+                    choice = Console.ReadLine();
+                    roomNr = Choice.Made(choice, roomNr, backyard,user);
+
+                }
+                if (roomNr == 15)//livingroom drawer
+                {
+                    drawerLiRoom.roomEnter();
+                    Console.Write("Choice: ");
+                    choice = Console.ReadLine();
+                    roomNr = Choice.Made(choice, roomNr, drawerLiRoom, user);
+
+                }
+
                 //Death in cellar.
                 if (roomNr == 20)
                 {
