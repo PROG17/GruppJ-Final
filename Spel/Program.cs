@@ -42,15 +42,13 @@ Please enter your name : ");
 
             }
             string choice = "";
+            Player user = new Player(name);  
             
-            var play  = new Game(name);
-            play.GameStart();
+            var play  = new Game(name, user);
 
             while (game)
             {
-                Console.Write("Choice: ");
-                choice = Console.ReadLine().ToUpper();
-                roomNr = play.Input(choice, roomNr);
+               game = play.GameRun();
             }
             
 
