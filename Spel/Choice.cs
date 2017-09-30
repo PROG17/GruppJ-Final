@@ -110,8 +110,6 @@ namespace Spel
             }
             if (choiceSplit[0] == "USE")
             {
-               
-               
                 if (rum == 0)
                 {
                     switch (choiceSplit[1])
@@ -123,7 +121,6 @@ namespace Spel
                         default:
                             Console.WriteLine("No such item.");
                             break;
-
                     }
                 }
 
