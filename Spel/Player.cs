@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Spel
 {
-    class Player
+    public class Player
     {
         private string name = "";
         public List<Item> playerInventory = new List<Item>();

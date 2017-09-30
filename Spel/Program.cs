@@ -42,8 +42,9 @@ Please enter your name : ");
 
             }
             string choice = "";
-            Player user = new Player(name);  
-            
+            Player user = new Player(name);
+            Console.WriteLine("DET GÅR ATT ANVÄNDA GO,  USE,  USE item ON item, LOOK och LOOK TV tex.\nFinslipa lite om du vill osv. Skriv om du har några frågor");
+            Console.Read();
             var play  = new Game(name, user);
 
             while (game)
