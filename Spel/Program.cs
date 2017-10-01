@@ -49,14 +49,14 @@ namespace Spel
                               "\nINSPECT (Object)" +
                               "\n\nFor Controls, write HELP" +
                               "\nPress enter to start game.");
-            Console.ReadKey();
+            Console.ReadLine();
             Console.Clear();
             Console.WriteLine("You are a masterthief who just broke in to a big house." +
                         "\nTo keep the alarm from going of you had to cut the power.");
             string choice = "LOOK";
             Player user = new Player(name);
 
-            Console.Read();
+            Console.ReadLine();
             var play = new Game(name, user);
 
             while (game)

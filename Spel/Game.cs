@@ -288,11 +288,10 @@ namespace Spel
             {
                 player.playerInventory.Add(key);
             }
-
             if (input == "HELP")
             {
                 Help();
-                Console.ReadKey();
+                Console.ReadLine();
                 GameRun();
             }
             input = input.Trim();
@@ -546,7 +545,6 @@ namespace Spel
                 }
 
             }
-
             else if (inputWords[0] == "LOOK" || inputWords[0] == "INSPECT")
             {
                 bool itemFound = false;
@@ -694,6 +692,12 @@ namespace Spel
                             roomNr = 15;
                             GameRun();
                         }
+                    }
+                    else
+                    {
+                        Console.WriteLine("No reason to do that...");
+                        Console.Read();
+                        GameRun();
                     }
                 }
 
