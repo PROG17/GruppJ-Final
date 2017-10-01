@@ -176,7 +176,7 @@ namespace Spel
             var tulips = new Föremål("Tulips", "Tulips in various colors.");
             var windowBackyard = new Föremål("Window", "The window leads to the bedroom");
             var mirror = new Föremål("Mirror", "A big mirror. You see yourself");
-            var drawerBEDROOM = new Föremål("Bedroom Drawer", "A bedside table drawer. Looks like it can be opened.");
+            var drawerBEDROOM = new Föremål("Drawer", "A bedside table drawer. Looks like it can be opened.");
             var bookshelf = new Föremål("Bookshelf",
                 "A white bookshelf with loads of junk in it. Mostly books but also " +
                 "\na few decorative items. Player spots something shiny behind one of the books." +
@@ -736,7 +736,7 @@ namespace Spel
                             player.playerInventory.Remove(meat);
                             Console.WriteLine(
                                 "You push the pills into the meat. You wonder why you are doing this.");
-                            Console.WriteLine("You got: SleepingMeat");
+                            Console.WriteLine("Your meat is now laced with sleeping pills.");
                             Console.Read();
                             GameRun();
                         }
@@ -747,7 +747,7 @@ namespace Spel
                             player.playerInventory.Remove(meat);
                             Console.WriteLine(
                                 "You push the pills into the meat. You wonder why you are doing this.");
-                            Console.WriteLine("You got: SleepingMeat");
+                            Console.WriteLine("Your meat is now laced with sleeping pills.");
                             Console.Read();
                             GameRun();
                         }
@@ -769,15 +769,7 @@ namespace Spel
                             Console.Read();
                             GameRun();
                         }
-                        if (inputWords[1] == "MEAT" && inputWords[3] == "PILLS")
-                        {
-                            player.playerInventory.Add(flashlightBatteries);
-                            player.playerInventory.Remove(flashlightWoBatteries);
-                            player.playerInventory.Remove(batteries);
-                            Console.WriteLine("You put the batteries in the flashlight. It works fine now.");
-                            Console.Read();
-                            GameRun();
-                        }
+                        
                         if (roomNr == 8)
                         {
                             if (inputWords[1] == "ROCK" && inputWords[3] == "WINDOW")
@@ -831,7 +823,7 @@ namespace Spel
             {
                 if (localGameRun)
                 {
-                    Console.WriteLine("Invalid input.");
+                    Console.WriteLine("No such thing to use...");
                     Console.Read();
                     GameRun();
                 }
