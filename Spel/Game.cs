@@ -17,7 +17,7 @@ namespace Spel
         private string user = "";
         private int roomNr = 0;
         private bool localGameRun = true;
-        new Player player = new Player("");
+        Player player = new Player("");
         private bool DogIsSleep = false;
         private bool windowIsBroken = false;
 
@@ -28,7 +28,7 @@ namespace Spel
         Item rock = new Item("Rock", "Its a very throwable rock. It fits perfectly in your hand.", "Window");
         Item screwdriver = new Item("Screwdriver", "It's a screwdriver it looks useless.", "NADA");
         Item meat = new Item("Meat", "Meat, It's not what you came here to steal tho.", "Pills");
-        Item pills = new Item("Pills", "The label says 'Take one before 10 minutes before bedtime", "Meat");
+        Item pills = new Item("Pills", "The label says 'Take one 10 minutes before bedtime", "Meat");
         Item batteries = new Item("Batteries", "Two A Batterires", "Flashlight");
         Item lacedMeat = new Item("SleepingMeat", "Meat laced with sleeping pills", "Window");
 
@@ -54,29 +54,29 @@ namespace Spel
                                    "\nenough to make it possible to orientate without a lamp. " +
                                    "\nThe walls contains some motivational posters and a big picture in a black frame. " +
                                    "\nJust left of the entrance to the office is a big grey safe with a key lock. " +
-                                   "\"Player\" may only enter the living room from the office", "Office");
+                                   $"{player.name} may only enter the living room from the office", "Office");
 
             Room bathroom = new Room("This is a very small bathroom, espacially considered the size of the house. " +
                                      "\nThe bathroom just contains a small bathtub, a sink and a cabinet." +
                                      "\nThe floor and walls are all in tiles. The floor is a mix of black and white tiles, " +
                                      "\nlike a chessboard, and the walls are completely white. " +
                                      "\nThere is a small window close to the roof and the moonlight is shining straight " +
-                                     "\nthrough the window allowing \"Player\" to see." +
-                                     "\"Player\" may only enter the living room from the bathroom", "Bathroom");
+                                     $"\nthrough the window allowing {player.name} to see. " +
+                                     $"{player.name} may only enter the living room from the bathroom", "Bathroom");
 
             Room diningRoom1 = new Room(
                 "The dining room is pretty dark since it is placed in the center of the house, only a little " + //Innan Bedroom är upplåst
-                "\nmoonlight finds its way to this room so \"Player\" can only see the contours of" +
-                "\n this rooms objects. There seems to be a large dining room tabel in the middle of the room " +
+                $"\nmoonlight finds its way to this room so {player.name} can only see the contours of " +
+                "\nthis rooms objects. There seems to be a large dining room table in the middle of the room " +
                 "\nwith eight chairs around it. There appear to be some shelves in the corners of the room with " +
-                "\ngreen plants on them. Not much interesting that \"Player\" can see in this room.\n" +
+                $"\ngreen plants on them. Not much interesting that {player.name} can see in this room.\n" +
                 "\nThere seem to be 4 possible exits from this room. To the kitchen, the livingroom, " +
                 "\nthe cellar witch seems to be pitch black and then there is a closed door which " +
                 "\nprobably lead to the bedroom.", "Dining Room");
 
             Room diningRoom2 = new Room(
                 "The dining room is pretty dark since it is placed in the center of the house, only a little " + //Efter Bedroom är upplåst
-                "\nmoonlight finds its way to this room so \"Player\" can only see the contours of" +
+                $"\nmoonlight finds its way to this room so {player.name} can only see the contours of" +
                 "\n this rooms objects. There seems to be a large dining room tabel in the middle of the room " +
                 "\nwith eight chairs around it. There appear to be some shelves in the corners of the room with " +
                 "\ngreen plants on them. Not much interesting that \"Player\" can see in this room.\n" +
@@ -88,7 +88,7 @@ namespace Spel
                 "\nthey are brand new. Centered in the kitchen is a lovely kitchen island with an integrated stove. " +
                 "\nAll of the kitchen counters are made out of white marmor. All of the kitchen is dekorated with fresh " +
                 "\nspices and herbs in little pots. Seems like the owner likes to spend time in the kitchen since he or she " +
-                "\nseems to have put a lot of effort in dekorating the kitchen. From the kitchen window \"Player\" can " +
+                $"\nseems to have put a lot of effort in dekorating the kitchen. From the kitchen window {player.name} can " +
                 "\nsee a fenced backyard. \"Player\" may  enter the diningroom or backyard through window from the kitchen.",
                 "Kitchen"); //Window is Item here as well
 
@@ -97,14 +97,14 @@ namespace Spel
                                      "\nStraight ahead you see a big barbecue grill. Alongside the house wall there is a flowerbed " +
                                      "\nwith some roses and tulips. The flowerbed is beautifully framed with some fist sized rocks." +
                                      "\nThe gate to the front of the house is shut, probably locked." +
-                                     "\nFrom the backyard \"player\" can see a window to the kitchen and a window to the bedroom, although it is closed. \n",
+                                     $"\nFrom the backyard {player.name} can see a window to the kitchen and a window to the bedroom, although it is closed. \n",
                 "Backyard"); //Stone=Item
             Room backyardBroken = new Room("The backyard is huge. It has a perfectly cut lawn with an apple tree " +
                                            "\ngrowing in the left side of the backyard, seems to be Granny Smith but it's hard to tell from such a long distance. " +
                                            "\nStraight ahead you see a big barbecue grill. Alongside the house wall there is a flowerbed " +
                                            "\nwith some roses and tulips. The flowerbed is beautifully framed with some fist sized rocks." +
                                            "\nThe gate to the front of the house is shut, probably locked." +
-                                           "\nFrom the backyard \"player\" can see a window to the kitchen and a window to the bedroom, broken and ready for entry. \n",
+                                           $"\nFrom the backyard {player.name} can see a window to the kitchen and a window to the bedroom, broken and ready for entry. \n",
                 "Backyard"); //Stone=Item
             Room backyardDog =
                 new Room(
@@ -115,23 +115,23 @@ namespace Spel
                                     "\nThe room is beautifully decorated with long curtains in dark, cozy colors. There is a tall " +
                                     "\nhuman sized mirror beside the bedroom drawer which reflect the moonlight, making it pretty easy do orientate in the bedroom." +
                                     "\nThere is a Queen sized bed with bedside tables at each side of the bed. " +
-                                    "\nEach of the tables has a lamp, but only one of them has an alarmclock and a drawer." +
-                                    "\n The owner must be living alone. " +
-                                    "\n\"Player\" can also see into the backyard through the window and a door that says livingroom ","Bedroom");
+                                    "\nEach of the tables has a lamp, but only one of them has an alarmclock and a drawer. " +
+                                    "\nThe owner must be living alone. " +
+                                    $"\n{player.name} can also see into the backyard through the window and a door that says dining room ", "Bedroom");
 
-            Room darkCellar = new Room($"The cellar is pitch black and {user} can't see anything. " +
-                                       $"\n {user} trips and fall down the stairs braking his neck.", "Cellar");
+            Room darkCellar = new Room($"The cellar is pitch black and {player.name} can't see anything. " +
+                                       $"\n {player.name} trips and fall down the stairs, with a broken neck as a result.", "Cellar");
 
             Room lightCellar = new Room("The flashlight now reveals the cellar. " +
                                         "\nThe house owner obviously use this room as storage. There's loads of things down here. Mostly junk..." +
                                         "\nAlthough there is a well sorted wine cellar down here as well. " +
-                                        "\n\"Player\" spot a bottle of Chateau Margaux, one of the worlds most expensive bottles of wine!" + /*Need corkskrew in kitchen :D (Item) */
+                                        $"\n{player.name} spot a bottle of Chateau Margaux, one of the worlds most expensive bottles of wine!" + /*Need corkskrew in kitchen :D (Item) */
                                         "\nFar back in the cellar is an old bookshelf with lots of junk in it and" +
                                         "\nin the middle of the cellar is a worned out pooltable. Seems to be mostly junk down here?",
                 "");
             Room drawerLiRoom = new Room("You open the the drawer", "drawer");
             Room drawerBedroom = new Room("You open the the drawer", "drawer");
-            Room cabinetRoom = new Room("You open the the cabinet", "cabinet");
+            Room cabinetRoom = new Room("You open the cabinet", "cabinet");
             Room fridgeRoom = new Room("You open the the fridge", "Fridge");
             Room freezerRoom = new Room("You open the the Freezer, Theres nothing here.", "Freezer");
             Room safeRoom = new Room("You open the safe and find the treassure you came for.\n You leave the house as a rich man. ", "Safe");
@@ -148,8 +148,8 @@ namespace Spel
                 "A big antique drawer in dark wood. Could possibly be worth quite a lot of money.");
             var tv = new Föremål("TV", "A big Samsung flatscreen TV. Probably around 47 inches.");
             var lamp = new Föremål("Lamp",
-                "This lamp seems familiar. Player think it's from IKEA and is called \"Böja\". " +
-                "\n*Player makes a quick google-search*, Nope, it was from MIO.");
+                $"This lamp seems familiar. {player.name} think it's from IKEA and is called \"Böja\". " +
+                $"\n*{player.name} makes a quick google-search*, Nope, it was from MIO.");
             var drawerOFFICE = new Föremål("Drawer", "A modern Office desk drawer.");
             var computer = new Föremål("Computer", "A computer... Nothing special. Moving on!");
             var windowOFFICE = new Föremål("Window",
@@ -288,10 +288,17 @@ namespace Spel
             {
                 player.playerInventory.Add(key);
             }
+
+            if (input == "HELP")
+            {
+                Help();
+                Console.ReadKey();
+                GameRun();
+            }
             input = input.Trim();
             var inputWords = input.Split(' ');
 
-            if (inputWords[0] == "GO")
+            if (inputWords[0] == "ENTER" || inputWords[0] == "GO")
             {
                 if (inputWords.Length < 2)
                 {
@@ -300,7 +307,10 @@ namespace Spel
                     Console.Read();
                     GameRun();
                 }
-
+                if (inputWords.Length == 3)
+                {
+                    inputWords[1] = inputWords[1] + inputWords[2];
+                }
                 if (roomNr == 0) //vardagsrummet
                 {
                     switch (inputWords[1])
@@ -537,7 +547,7 @@ namespace Spel
 
             }
 
-            else if (inputWords[0] == "LOOK")
+            else if (inputWords[0] == "LOOK" || inputWords[0] == "INSPECT")
             {
                 bool itemFound = false;
                 if (inputWords.Length == 1) //Om man bara skrivit look
@@ -580,7 +590,6 @@ namespace Spel
             }
             else if (inputWords[0] == "GET")
             {
-                string send = "";
                 bool itemFound = false;
                 foreach (var item in RoomList[roomNr].roomInventory)
                 {
@@ -827,29 +836,34 @@ namespace Spel
         }
 
         void FatalChoice()
-            {
-                localGameRun = false;
-                Console.Clear();
-                RoomList[roomNr].getDescription();
-                GameRun();
+        {
+            localGameRun = false;
+            Console.Clear();
+            RoomList[roomNr].getDescription();
+            GameRun();
 
+        }
+
+        public bool GameRun() //spelet startas
+        {
+            if (localGameRun)
+            {
+                RoomList[roomNr].roomEnter();
+                Input();
+                return true;
             }
 
-            public bool GameRun() //spelet startas
+            else
             {
-                if (localGameRun)
-                {
-                    RoomList[roomNr].roomEnter();
-                    Input();
-                    return true;
-                }
-
-                else 
-                {
-                    return false;
-                }
+                return false;
             }
-        
+        }
+
+        public void Help()
+        {
+            Console.WriteLine("\nCommands: \nEnter (Room), \nIn rooms where you may only go back you can write GO BACK,  \nUSE,  \nUSE item ON item, \nLOOK. \nINSPECT (Object)");
+        }
+
     }
 }
 

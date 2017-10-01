@@ -17,17 +17,16 @@ namespace Spel
         static void Main(string[] args)
         {
             //Intro.PlayIntro();
-            var roomNr = 0;
+            //var roomNr = 0;
             bool menu = true;
             string name = "";
             bool game = true;
             while (menu)
             {
                 Console.Clear();
-                Console.Write(@"You are a masterthief who just broke in to a big house. 
-To keep the alarm from going of you had to cut the power. You just entered the house in. 
-Please enter your name : ");
+                Console.Write("Please enter your name : ");
                 name = Console.ReadLine();
+                Console.Clear();
                 if (name == "")
                 {
                     Console.WriteLine("Please enter a valid name.");
@@ -36,22 +35,35 @@ Please enter your name : ");
                 }
                 else
                 {
-                    Console.WriteLine("Welcome " + name + ".");
+                    Console.WriteLine("Welcome " + name + ".\n");
                     menu = false;
                 }
 
             }
+            Console.WriteLine("\nCommands: " +
+                              "\nEnter (Room), " +
+                              "\nIn rooms where you may only go back you can write GO BACK,  " +
+                              "\nUSE,  " +
+                              "\nUSE item ON item, " +
+                              "\nLOOK. " +
+                              "\nINSPECT (Object)" +
+                              "\n\nFor Controls, write HELP" +
+                              "\nPress enter to start game.");
+            Console.ReadKey();
+            Console.Clear();
+            Console.WriteLine("You are a masterthief who just broke in to a big house." +
+                        "\nTo keep the alarm from going of you had to cut the power.");
             string choice = "";
             Player user = new Player(name);
-            Console.WriteLine("DET GÅR ATT ANVÄNDA GO,  USE,  USE item ON item, LOOK och LOOK TV tex.\nFinslipa lite om du vill osv. Skriv om du har några frågor");
+
             Console.Read();
-            var play  = new Game(name, user);
+            var play = new Game(name, user);
 
             while (game)
             {
-               game = play.GameRun();
+                game = play.GameRun();
             }
-            
+
 
 
 

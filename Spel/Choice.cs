@@ -35,7 +35,7 @@ namespace Spel
 
             }//Om man bara skriver look för att se sig om i rummet
             //multiple word choices
-            if (choiceSplit[0] == "LOOK" && choiceSplit.Length > 1)// om man tittar på en pryl.
+            if (choiceSplit[0] == "INSPECT" && choiceSplit.Length > 1)// om man tittar på en pryl.
             {
                 bool found = false;
                 foreach (var item in actual.roomdecorations)// kollar om saken man försöker titta på finns i rummet 
@@ -131,7 +131,7 @@ namespace Spel
             //livingroom
             if (rum == 0)
             {
-                if (choiceSplit[0] == "GO")
+                if (choiceSplit[0] == "ENTER")
                 {
                     switch (choiceSplit[1])
                     {
@@ -154,7 +154,7 @@ namespace Spel
             //office and bathroom
             else if (rum == 1 || rum == 2) //både badrum och office leder bara tillbaka.
             {
-                if (choiceSplit[0] == "GO")
+                if (choiceSplit[0] == "ENTER")
                 {
                     if (choiceSplit[1] == "LIVINGROOM" || choiceSplit[1] == "BACK")
                     {
@@ -166,7 +166,7 @@ namespace Spel
             //Diningroom
             else if (rum == 4)
             {
-                if (choiceSplit[0] == "GO")
+                if (choiceSplit[0] == "ENTER")
                 {
                     if (choiceSplit[1] == "LIVINGROOM")
                     {
@@ -209,7 +209,7 @@ namespace Spel
             }
             else if (rum == 6)
             {
-                if (choiceSplit[0] == "GO")
+                if (choiceSplit[0] == "ENTER")
                 {
                     switch (choiceSplit[1])
                     {
@@ -229,7 +229,7 @@ namespace Spel
             else if (rum == 15)
             {
 
-                if (choiceSplit[0] == "GO")
+                if (choiceSplit[0] == "ENTER")
                 {
                     if (choiceSplit[1] == "LIVINGROOM" || choiceSplit[1] == "BACK")
                     {

@@ -12,7 +12,7 @@ namespace Spel
         public string Description;
         private string Name;
         public bool firstTime = true;
-        public List<Föremål> roomdecorations  = new List<Föremål>(); // saker man kan titta på.
+        public List<Föremål> roomdecorations = new List<Föremål>(); // saker man kan titta på.
         public List<Item> roomInventory = new List<Item>(); //saker man kan plocka upp.
 
 
@@ -21,7 +21,7 @@ namespace Spel
         {
             Description = description;
             Name = name;
-            
+
         }
 
         public void getDescription()
@@ -36,23 +36,24 @@ namespace Spel
             {
 
                 Console.Clear();
-                Console.WriteLine("You are in the" + Name);
+                Console.WriteLine("You are in the " + Name);
                 Console.WriteLine(Description);
-                if (roomInventory.Count >0 )
+                if (roomInventory.Count > 0)
                 {
                     Console.Write("There is a ");
                     foreach (var item in roomInventory)
                     {
                         Console.Write(item.GetName());
-                       
+
                     }
                     Console.WriteLine(" in the " + Name + ".");
                 }
-                
+
                 firstTime = false;
             }
             else
-            {   Console.Clear();
+            {
+                Console.Clear();
                 Console.WriteLine("You are in the " + Name);
             }
         }

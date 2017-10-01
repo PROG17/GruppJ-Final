@@ -8,7 +8,7 @@ namespace Spel
 {
     public class Player
     {
-        private string name = "";
+        public string name = "";
         public List<Item> playerInventory = new List<Item>();
 
         public Player(string name)
