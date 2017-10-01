@@ -47,6 +47,7 @@ namespace Spel
                               "\nUSE item ON item, " +
                               "\nLOOK. " +
                               "\nINSPECT (Object)" +
+                              "\nINVENTORY to show your inventory" +
                               "\n\nFor Controls, write HELP" +
                               "\nPress enter to start game.");
             Console.ReadLine();
@@ -63,6 +64,7 @@ namespace Spel
             {
                 game = play.GameRun();
             }
+            Console.WriteLine("thanks for paly!");
 
             
 

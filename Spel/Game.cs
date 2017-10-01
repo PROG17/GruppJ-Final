@@ -128,7 +128,7 @@ namespace Spel
                                         $"\n{player.name} spot a bottle of Chateau Margaux, one of the worlds most expensive bottles of wine!" + /*Need corkskrew in kitchen :D (Item) */
                                         "\nFar back in the cellar is an old bookshelf with lots of junk in it and" +
                                         "\nin the middle of the cellar is a worned out pooltable. Seems to be mostly junk down here?",
-                "");
+                "Cellar");
             Room drawerLiRoom = new Room("You open the the drawer", "drawer");
             Room drawerBedroom = new Room("You open the the drawer", "drawer");
             Room cabinetRoom = new Room("You open the cabinet", "cabinet");
@@ -270,7 +270,7 @@ namespace Spel
             RoomList.Add(fridgeRoom); //14
             RoomList.Add(cabinetRoom); //15
             RoomList.Add(backyardBroken); //16
-            RoomList.Add(safeRoom); //16
+            RoomList.Add(safeRoom); //17
 
 
         }
@@ -503,13 +503,34 @@ namespace Spel
                     }
 
                 }
-                else if (roomNr == 16) //backyard
+                else if (roomNr == 16) //backyard trasigt fönster
                 {
                     switch (inputWords[1])
                     {
 
                         case "BEDROOM":
                             roomNr = 9;
+                            GameRun();
+                            break;
+                        case "KITCHEN":
+                            roomNr = 6;
+                            GameRun();
+                            break;
+                        default:
+                            Console.WriteLine("No such room to enter from here");
+                            Console.Read();
+                            GameRun();
+                            break;
+                    }
+                }
+                else if (roomNr == 8) //backyard
+                {
+                    switch (inputWords[1])
+                    {
+
+                        case "BEDROOM":
+                            Console.WriteLine("The Window is locked.");
+                            Console.ReadLine();
                             GameRun();
                             break;
                         case "KITCHEN":
@@ -804,8 +825,8 @@ namespace Spel
                                 player.playerInventory.Remove(lacedMeat);
                                 Console.WriteLine("You use the Key and unlocks the safe.");
                                 roomNr = 17;
-                                Console.Read();
-                                FatalChoice();
+                                Console.ReadLine();
+                                GameCleared();;
                             }
                         }
                         else
@@ -822,19 +843,19 @@ namespace Spel
                         GameRun();
                     }
                 }
-            }
-            else
-            {
-                if (localGameRun)
+                else
                 {
+
                     Console.WriteLine("No such thing to use...");
                     Console.Read();
                     GameRun();
+
                 }
             }
+            
         }
 
-        void FatalChoice()
+        public void FatalChoice()
         {
             localGameRun = false;
             Console.Clear();
@@ -846,25 +867,15 @@ namespace Spel
         
         public bool GameRun() //spelet startas
         {
-            
-            if (localGameRun)
+
+            if (localGameRun) 
             {
                 RoomList[roomNr].roomEnter();
                 Input();
-                if (localGameRun)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                return true;
             }
-
-            else
-            {
                 return false;
-            }
+            
         }
 
         public void Help()
@@ -872,6 +883,15 @@ namespace Spel
             Console.WriteLine("\nCommands: \nEnter (Room), \nIn rooms where you may only go back you can write GO BACK,  \nUSE,  \nUSE item ON item, \nLOOK. \nINSPECT (Object)");
         }
 
+        public void GameCleared()
+        {
+            localGameRun = false;
+            Console.Clear();
+            Console.WriteLine("You leave the room and run out with the treassure safely tucked on your person.\n Your wife will not be beating you tonight. Great job or whatever.");
+            Console.WriteLine("Press enter to EXIT the game");
+            Console.ReadLine();
+            GameRun();
+        }
     }
 }
 
