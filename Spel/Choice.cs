@@ -126,7 +126,7 @@ namespace Spel
 
             }
 
-
+            
             //movement choices.
             //livingroom
             if (rum == 0)

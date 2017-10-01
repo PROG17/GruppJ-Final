@@ -53,7 +53,7 @@ namespace Spel
             Console.Clear();
             Console.WriteLine("You are a masterthief who just broke in to a big house." +
                         "\nTo keep the alarm from going of you had to cut the power.");
-            string choice = "";
+            string choice = "LOOK";
             Player user = new Player(name);
 
             Console.Read();
@@ -64,7 +64,7 @@ namespace Spel
                 game = play.GameRun();
             }
 
-
+            
 
 
 

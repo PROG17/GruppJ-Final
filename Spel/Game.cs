@@ -829,9 +829,12 @@ namespace Spel
             }
             else
             {
-                Console.WriteLine("Invalid input.");
-                Console.Read();
-                GameRun();
+                if (localGameRun)
+                {
+                    Console.WriteLine("Invalid input.");
+                    Console.Read();
+                    GameRun();
+                }
             }
         }
 
@@ -843,14 +846,23 @@ namespace Spel
             GameRun();
 
         }
-
+        
+        
         public bool GameRun() //spelet startas
         {
+            
             if (localGameRun)
             {
                 RoomList[roomNr].roomEnter();
                 Input();
-                return true;
+                if (localGameRun)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
 
             else
