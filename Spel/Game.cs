@@ -405,8 +405,11 @@ namespace Spel
                                 roomNr = 12;
                                 GameRun();
                             }
-                            roomNr = 5;
-                            FatalChoice(); //dödligt val
+                            else
+                            {
+                                roomNr = 5;
+                                FatalChoice(); //dödligt val
+                            }
                             break;
                         case "KITCHEN":
                             roomNr = 6;
@@ -446,8 +449,12 @@ namespace Spel
                             {
                                 roomNr = 16;
                             }
-                            roomNr = 8;
-                            GameRun();
+                            else
+                            {
+                                roomNr = 8;
+                                GameRun();
+                            }
+                            
                             break;
                         default:
                             Console.WriteLine("No such room to enter from here");
@@ -471,12 +478,12 @@ namespace Spel
                             break;
                         case "DININGROOM":
                             Console.WriteLine("The door is locked.");
-                            Console.Read();
+                            Console.ReadLine();
                             GameRun();
                             break;
                         default:
                             Console.WriteLine("No such room to enter from here");
-                            Console.Read();
+                            Console.ReadLine();
                             GameRun();
                             break;
                     }
@@ -794,7 +801,7 @@ namespace Spel
                             Console.Read();
                             GameRun();
                         }
-                        
+
                         if (roomNr == 8)
                         {
                             if (inputWords[1] == "ROCK" && inputWords[3] == "WINDOW")
@@ -822,11 +829,9 @@ namespace Spel
                         {
                             if (inputWords[1] == "KEY" && inputWords[3] == "SAFE")
                             {
-                                player.playerInventory.Remove(lacedMeat);
-                                Console.WriteLine("You use the Key and unlocks the safe.");
-                                roomNr = 17;
-                                Console.ReadLine();
-                                GameCleared();;
+                                GameCleared();
+                                
+
                             }
                         }
                         else
@@ -852,7 +857,7 @@ namespace Spel
 
                 }
             }
-            
+
         }
 
         public void FatalChoice()
@@ -863,19 +868,19 @@ namespace Spel
             GameRun();
 
         }
-        
-        
+
+
         public bool GameRun() //spelet startas
         {
 
-            if (localGameRun) 
+            if (localGameRun)
             {
                 RoomList[roomNr].roomEnter();
                 Input();
                 return true;
             }
-                return false;
-            
+            return false;
+
         }
 
         public void Help()
