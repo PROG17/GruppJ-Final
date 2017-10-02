@@ -889,12 +889,12 @@ namespace Spel
             GameRun();
 
         }
-        
-        
+
+
         public bool GameRun() //spelet startas
         {
 
-            if (localGameRun) 
+            if (localGameRun)
             {
                 RoomList[roomNr].roomEnter();
                 Input();
