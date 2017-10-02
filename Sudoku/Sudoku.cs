@@ -105,13 +105,10 @@ namespace Sudoku
             if (canbesolved == true)
             {
                 Console.Clear();
-                Console.WriteLine("\nSolved!\n");
+                Console.WriteLine("Solved!\n");
                 DisplayBoard();
             }
-            else
-            {
-                return;
-            }
+            
         }
         public int Search(int row/*i*/, int col/*j*/)
         {
@@ -222,7 +219,6 @@ namespace Sudoku
                             {
                                 if (NoConflicts(row, col, val, board) == true) //Om # är möjlig
                                 {
-
                                     board[row, col] = val;  //Försök sätta ut # 
 
                                     if (board[row, col] != 0)
@@ -230,7 +226,6 @@ namespace Sudoku
                                         if (SolveSudoku(board)) return true;
                                     }
                                     board[row, col] = UNASSIGNED; //Ta bort och försök igen
-
 
                                 }
                                 if (row == 0 && col == 0 && val == 9)

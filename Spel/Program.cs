@@ -16,8 +16,7 @@ namespace Spel
 
         static void Main(string[] args)
         {
-            //Intro.PlayIntro();
-            //var roomNr = 0;
+            
             bool menu = true;
             string name = "";
             bool game = true;
