@@ -30,7 +30,7 @@ namespace Spel
             Console.WriteLine(Description);
         }
 
-        public void roomEnter()
+        public void roomEnter(int roomNr)
         {
             if (firstTime)
             {
@@ -40,7 +40,24 @@ namespace Spel
                 Console.WriteLine(Description);
                 if (roomInventory.Count > 0)
                 {
-                    Console.Write("There is a ");
+                    if (roomNr == 15)
+                    {
+                        Console.Write("There is a bottle of ");
+
+                    }
+                    else if (roomNr == 14)
+                    {
+                        Console.Write("There is a hunk of ");
+                    }
+                    else if (roomNr == 10)
+                    {
+                        Console.Write("There is a pair of ");
+                    }
+                    else
+                    {
+                        Console.Write("There is a ");
+
+                    }
                     foreach (var item in roomInventory)
                     {
                         Console.Write(item.GetName());

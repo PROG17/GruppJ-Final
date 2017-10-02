@@ -90,7 +90,7 @@ namespace Spel
                 "\nAll of the kitchen counters are made out of white marmor. All of the kitchen is dekorated with fresh " +
                 "\nspices and herbs in little pots. Seems like the owner likes to spend time in the kitchen since he or she " +
                 $"\nseems to have put a lot of effort in dekorating the kitchen. From the kitchen window {player.name} can " +
-                "\nsee a fenced backyard. \"Player\" may  enter the diningroom or backyard through window from the kitchen.",
+                $"\nsee a fenced backyard. {player.name} may  enter the diningroom or backyard through window from the kitchen.",
                 "Kitchen"); //Window is Item here as well
 
             Room backyard = new Room("The backyard is huge. It has a perfectly cut lawn with an apple tree " +
@@ -649,7 +649,12 @@ namespace Spel
                         string temp = item.GetName().ToUpper();
                         if (temp == inputWords[1])
                         {
+                            
                             RoomList[roomNr].roomInventory.Add(item);
+                            if (roomNr == 8)
+                            {
+                                RoomList[16].roomInventory.Add(item);
+                            }
                             player.playerInventory.Remove(item);
                             itemFound = true;
                             Console.WriteLine("You droped " + item.GetName() + ".");
@@ -896,7 +901,7 @@ namespace Spel
 
             if (localGameRun)
             {
-                RoomList[roomNr].roomEnter();
+                RoomList[roomNr].roomEnter(roomNr);
                 Input();
                 if (localGameRun)
                 {
