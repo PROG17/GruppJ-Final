@@ -88,7 +88,7 @@ namespace Sudoku
                     if (noHit == 0) { canbesolved = SolveSudoku(board); }
                     if (canbesolved == false)
                     {
-
+                        Console.WriteLine("Detta pussel är omöjligt att lösa");
                         break;
                     }
                 }
@@ -235,7 +235,6 @@ namespace Sudoku
                                 }
                                 if (row == 0 && col == 0 && val == 9)
                                 {
-                                    Console.WriteLine("Can't be solved! =(");
                                     return false;
                                 }
                             }

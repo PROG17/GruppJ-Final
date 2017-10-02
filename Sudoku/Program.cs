@@ -36,7 +36,7 @@ namespace Sudoku
                 Console.WriteLine("Felaktigt svar. försök igen.");
 
             }
-            var game = new Sudoku(Evil);
+            var game = new Sudoku(nogo);
             game.Solve(alla);
             Console.ReadKey();
 
