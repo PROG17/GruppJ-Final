@@ -55,7 +55,7 @@ namespace Spel
                                    "\nenough to make it possible to orientate without a lamp. " +
                                    "\nThe walls contains some motivational posters and a big picture in a black frame. " +
                                    "\nJust left of the entrance to the office is a big grey safe with a key lock. " +
-                                   $"{player.name} may only enter the living room from the office", "Office");
+                                   $"\n{player.name} may only enter the living room from the office", "Office");
 
             Room bathroom = new Room("This is a very small bathroom, espacially considered the size of the house. " +
                                      "\nThe bathroom just contains a small bathtub, a sink and a cabinet." +
@@ -121,7 +121,7 @@ namespace Spel
                                     $"\n{player.name} can also see into the backyard through the window and a door that says dining room ", "Bedroom");
 
             Room darkCellar = new Room($"The cellar is pitch black and {player.name} can't see anything. " +
-                                       $"\n {player.name} trips and fall down the stairs, with a broken neck as a result.", "Cellar");
+                                       $"\n{player.name} trips and fall down the stairs, with a broken neck as a result.", "Cellar");
 
             Room lightCellar = new Room("The flashlight now reveals the cellar. " +
                                         "\nThe house owner obviously use this room as storage. There's loads of things down here. Mostly junk..." +
@@ -135,7 +135,7 @@ namespace Spel
             Room cabinetRoom = new Room("You open the cabinet", "cabinet");
             Room fridgeRoom = new Room("You open the the fridge", "Fridge");
             Room freezerRoom = new Room("You open the the Freezer, Theres nothing here.", "Freezer");
-            Room safeRoom = new Room("You open the safe and find the treassure you came for.\n You leave the house as a rich man. ", "Safe");
+            Room safeRoom = new Room("You open the safe and find the treassure you came for.\nYou leave the house as a rich man. ", "Safe");
 
 
 
@@ -169,7 +169,7 @@ namespace Spel
             var stove = new Föremål("Stove", "A thin induction hob on top of the kitchen counter.");
             var windowKITCHEN = new Föremål("Window",
                 "An open window with a view to the backyard. You can see a doghouse with the name 'Destroyer of worlds' written on it");
-            var appletree = new Föremål("Apple Tree", "The apple tree is to far away to inspect and you " +
+            var appletree = new Föremål("Tree", "The apple tree is to far away to inspect and you " +
                                                       "\nprobably shouldn't head over there since the angry dog is here.");
             var grill = new Föremål("Grill",
                 "A family sized gas grill. It's a Weber and looks like it could be used right now.");
@@ -180,8 +180,8 @@ namespace Spel
             var drawerBEDROOM = new Föremål("Drawer", "A bedside table drawer. Looks like it can be opened.");
             var bookshelf = new Föremål("Bookshelf",
                 "A white bookshelf with loads of junk in it. Mostly books but also " +
-                "\na few decorative items. Player spots something shiny behind one of the books." +
-                "\nLooks like a key.");
+                "\na few decorative items. Player spots something shiny behind one of the books.");
+                
             var pooltable = new Föremål("Pooltable", "An old worn out pooltable. There are no balls or cues.");
             var safe = new Föremål("Safe", "A safe with a key hole.");
 
@@ -426,6 +426,11 @@ namespace Spel
                                 roomNr = 0;
                                 GameRun();
                                 break;
+                            case "BEDROOM":
+                                Console.WriteLine("The bedroom door is locked.");
+                                Console.ReadLine();
+                                GameRun();
+                                break;
                             default:
                                 Console.WriteLine("No such room to enter from here.");
                                 Console.Read();
@@ -585,7 +590,7 @@ namespace Spel
                         foreach (var item in RoomList[roomNr].roomdecorations)
                         {
                             string temp = item.GetName().ToUpper();
-                            if (temp == inputWords[1])
+                            if (temp == inputWords[1] && localGameRun == true) 
                             {
                                 itemFound = true;
                                 item.PrintDescription();
@@ -596,11 +601,12 @@ namespace Spel
                         foreach (var item in player.playerInventory)
                         {
                             string temp = item.GetName().ToUpper();
-                            if (temp == inputWords[1])
+                            if (temp == inputWords[1] && localGameRun == true) 
                             {
                                 itemFound = true;
                                 item.GetDescription();
                                 Console.Read();
+
                                 GameRun();
                             }
                         }
@@ -840,7 +846,7 @@ namespace Spel
                             {
                                 if (inputWords[1] == "KEY" && inputWords[3] == "SAFE")
                                 {
-                                    //player.playerInventory.Remove(lacedMeat);
+                                    
                                     Console.WriteLine("You use the Key and unlocks the safe.");
                                     roomNr = 17;
                                     Console.ReadLine();
@@ -890,7 +896,10 @@ namespace Spel
                 localGameRun = false;
                 Console.Clear();
                 RoomList[roomNr].getDescription();
+                Console.ReadLine();
+                Environment.Exit(0);
             }
+            
             GameRun();
 
         }
@@ -925,7 +934,7 @@ namespace Spel
             Console.WriteLine("You leave the room and run out with the treassure safely tucked on your person.\n Your wife will not be beating you tonight. Great job or whatever.");
             Console.WriteLine("Press enter to EXIT the game");
             Console.ReadLine();
-            GameRun();
+            Environment.Exit(0);
         }
     }
 }

@@ -36,7 +36,11 @@ namespace Spel
             {
 
                 Console.Clear();
-                Console.WriteLine("You are in the " + Name);
+                if (roomNr != 1 && roomNr != 10 && roomNr != 13 && roomNr != 14 && roomNr != 15)
+                {
+                    Console.WriteLine("You are in the " + Name);
+                }
+                
                 Console.WriteLine(Description);
                 if (roomInventory.Count > 0)
                 {
@@ -71,7 +75,11 @@ namespace Spel
             else
             {
                 Console.Clear();
-                Console.WriteLine("You are in the " + Name);
+                if (roomNr != 1 || roomNr != 10 || roomNr != 13 || roomNr != 14 || roomNr != 15)
+                {
+                    Console.WriteLine("You are in the " + Name);
+                }
+
             }
         }
     }
