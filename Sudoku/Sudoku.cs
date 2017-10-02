@@ -59,6 +59,7 @@ namespace Sudoku
         private int UNASSIGNED = 0;
         public void Solve()
         {
+            bool canbesolved = true;
             bool solved = false;
             int noHit = 0;
             while (solved == false)
@@ -82,11 +83,23 @@ namespace Sudoku
                     //DisplayBoard();
                     //Thread.Sleep(50);
                 }
-                if (noHit == 0) {SolveSudoku(board); }
+                if (noHit == 0) {canbesolved=SolveSudoku(board); }
+                if (canbesolved == false)
+                {
+                    
+                    break;
+                }
             }
-            Console.Clear();
-            Console.WriteLine("\nSolved!\n");
-            DisplayBoard();
+            if (canbesolved == true) 
+            {
+                Console.Clear();
+                Console.WriteLine("\nSolved!\n");
+                DisplayBoard();
+            }
+            else
+            {
+                return;
+            }
         }
         public int Search(int row/*i*/, int col/*j*/)
         {
