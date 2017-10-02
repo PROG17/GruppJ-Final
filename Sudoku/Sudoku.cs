@@ -214,9 +214,9 @@ namespace Sudoku
                         }
                     }
 
-                    Console.Clear();
-                    DisplayBoard();
-                    Thread.Sleep(50);
+                    //Console.Clear();
+                    //DisplayBoard();
+                    //Thread.Sleep(50);
                 }
 
                 return false;//Aktiverar Backtracking
