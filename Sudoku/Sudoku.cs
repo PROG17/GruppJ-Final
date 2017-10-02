@@ -78,9 +78,9 @@ namespace Sudoku
                         }
                         
                     }
-                    Console.Clear();
-                    DisplayBoard();
-                    Thread.Sleep(50);
+                    //Console.Clear();
+                    //DisplayBoard();
+                    //Thread.Sleep(50);
                 }
                 if (noHit == 0) {SolveSudoku(board); }
             }
@@ -208,7 +208,11 @@ namespace Sudoku
 
 
                                 }
-
+                                if (row == 0 && col == 0 && val == 9)
+                                {
+                                    Console.WriteLine("Can't be solved! =(");
+                                    return false;
+                                }
                             }
                             if (board[row, col] == UNASSIGNED) return false;
                         }
