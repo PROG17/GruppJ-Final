@@ -213,7 +213,7 @@ namespace Spel
                 {
                     switch (choiceSplit[1])
                     {
-                        case "LIVINGROOM":
+                        case "DININGROOM":
                             rum = 0;
                             break;
                         case "BACKYARD":

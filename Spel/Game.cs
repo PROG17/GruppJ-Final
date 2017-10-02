@@ -20,6 +20,7 @@ namespace Spel
         Player player = new Player("");
         private bool DogIsSleep = false;
         private bool windowIsBroken = false;
+        private bool cellarlight = false;
 
         Item flashlightWoBatteries = new Item("Flashlight", "It doesn't have any batteries.", "Batteries");
         Item flashlightBatteries = new Item("Flashlight", "It works fine now", "Batteries");
@@ -278,588 +279,613 @@ namespace Spel
         //metoder.
         public void Input()
         {
-            Console.Write("Choice: ");
-            string input = Console.ReadLine().ToUpper();
-            if (input == "")
+            if (localGameRun)
             {
-                GameRun();
-            }
-            if (input == "MEDIA")
-            {
-                player.playerInventory.Add(key);
-            }
-            if (input == "HELP")
-            {
-                Help();
-                Console.ReadLine();
-                GameRun();
-            }
-            input = input.Trim();
-            var inputWords = input.Split(' ');
-
-            if (inputWords[0] == "ENTER" || inputWords[0] == "GO")
-            {
-                if (inputWords.Length < 2)
+                Console.Write("Choice: ");
+                string input = Console.ReadLine().ToUpper();
+                if (input == "")
                 {
-                    Console.WriteLine("Not a valid move.");
-                    input = "";
-                    Console.Read();
                     GameRun();
                 }
-                if (inputWords.Length == 3)
+                if (input == "MEDIA")
                 {
-                    inputWords[1] = inputWords[1] + inputWords[2];
+                    player.playerInventory.Add(key);
                 }
-                if (roomNr == 0) //vardagsrummet
+                if (input == "HELP")
                 {
-                    switch (inputWords[1])
+                    Help();
+                    Console.ReadLine();
+                    GameRun();
+                }
+                input = input.Trim();
+                var inputWords = input.Split(' ');
+
+                if (inputWords[0] == "ENTER" || inputWords[0] == "GO")
+                {
+                    if (inputWords.Length < 2)
                     {
-                        case "DININGROOM":
-                            roomNr = 4;
-                            GameRun();
-                            break;
-                        case "OFFICE":
-                            roomNr = 2;
-                            GameRun();
-                            break;
-                        case "BATHROOM":
-                            roomNr = 3;
-                            GameRun();
-                            break;
-                        default:
-                            Console.WriteLine("No such room to enter from here.");
-                            Console.Read();
-                            GameRun();
-                            break;
+                        Console.WriteLine("Not a valid move.");
+                        input = "";
+                        Console.Read();
+                        GameRun();
                     }
-                }
-                else if (roomNr == 2 || roomNr == 3 || roomNr == 1) //bad och office eller ett object
-                {
-                    switch (inputWords[1])
+                    if (inputWords.Length == 3)
                     {
-                        case "BACK":
-                            roomNr = 0;
-                            GameRun();
-                            break;
-                        case "LIVINGROOM":
-                            roomNr = 0;
-                            GameRun();
-                            break;
-                        default:
-                            Console.WriteLine("No such room to enter from here.");
-                            Console.ReadKey();
-                            GameRun();
-                            break;
+                        inputWords[1] = inputWords[1] + inputWords[2];
+                    }
+                    if (roomNr == 0) //vardagsrummet
+                    {
+                        switch (inputWords[1])
+                        {
+                            case "DININGROOM":
+                                roomNr = 4;
+                                GameRun();
+                                break;
+                            case "OFFICE":
+                                roomNr = 2;
+                                GameRun();
+                                break;
+                            case "BATHROOM":
+                                roomNr = 3;
+                                GameRun();
+                                break;
+                            default:
+                                Console.WriteLine("No such room to enter from here.");
+                                Console.Read();
+                                GameRun();
+                                break;
+                        }
+                    }
+                    else if (roomNr == 2 || roomNr == 3 || roomNr == 1) //bad och office eller ett object
+                    {
+                        switch (inputWords[1])
+                        {
+                            case "BACK":
+                                roomNr = 0;
+                                GameRun();
+                                break;
+                            case "LIVINGROOM":
+                                roomNr = 0;
+                                GameRun();
+                                break;
+                            default:
+                                Console.WriteLine("No such room to enter from here.");
+                                Console.ReadKey();
+                                GameRun();
+                                break;
 
 
+                        }
+
+                    }
+                    else if (roomNr == 13 || roomNr == 14) //kyl och frys
+                    {
+                        switch (inputWords[1])
+                        {
+                            case "BACK":
+                                roomNr = 6;
+                                GameRun();
+                                break;
+                            case "KITCHEN":
+                                roomNr = 6;
+                                GameRun();
+                                break;
+                            default:
+                                Console.WriteLine("No such room to enter from here.");
+                                Console.ReadKey();
+                                GameRun();
+                                break;
+
+
+                        }
+                    }
+                    else if (roomNr == 15) //cabinet
+                    {
+                        switch (inputWords[1])
+                        {
+                            case "BACK":
+                                roomNr = 3;
+                                GameRun();
+                                break;
+                            case "BATHROOM":
+                                roomNr = 3;
+                                GameRun();
+                                break;
+                            default:
+                                Console.WriteLine("No such room to enter from here.");
+                                Console.ReadKey();
+                                GameRun();
+                                break;
+                        }
+                    }
+                    else if (roomNr == 4) //diningroom
+                    {
+                        switch (inputWords[1])
+                        {
+                            case "CELLAR":
+                                if (player.playerInventory.Contains(flashlightBatteries))
+                                {
+                                    roomNr = 12;
+                                    GameRun();
+                                }
+                                else if (!player.playerInventory.Contains(flashlightBatteries) && cellarlight==false)
+                                {
+                                    roomNr = 5;
+                                    FatalChoice(); //dödligt val
+                                }
+                                break;
+                            case "KITCHEN":
+                                roomNr = 6;
+                                GameRun();
+                                break;
+                            case "BACK":
+                                roomNr = 0;
+                                GameRun();
+                                break;
+                            case "LIVINGROOM":
+                                roomNr = 0;
+                                GameRun();
+                                break;
+                            default:
+                                Console.WriteLine("No such room to enter from here.");
+                                Console.Read();
+                                GameRun();
+                                break;
+                        }
+                    }
+                    else if (roomNr == 6) //kitchen
+                    {
+                        switch (inputWords[1])
+                        {
+
+                            case "DININGROOM":
+                                roomNr = 4;
+                                GameRun();
+                                break;
+                            case "BACKYARD":
+                                if (!DogIsSleep)
+                                {
+                                    roomNr = 7;
+                                    FatalChoice();
+                                }
+                                if (windowIsBroken)
+                                {
+                                    roomNr = 16;
+                                }
+                                roomNr = 8;
+                                GameRun();
+                                break;
+                            default:
+                                Console.WriteLine("No such room to enter from here");
+                                Console.Read();
+                                GameRun();
+                                break;
+                        }
+                    }
+                    else if (roomNr == 9) //bedroom
+                    {
+                        switch (inputWords[1])
+                        {
+
+                            case "BACK":
+                                roomNr = 16;
+                                GameRun();
+                                break;
+                            case "BACKYARD":
+                                roomNr = 16;
+                                GameRun();
+                                break;
+                            case "DININGROOM":
+                                Console.WriteLine("The door is locked.");
+                                Console.Read();
+                                GameRun();
+                                break;
+                            default:
+                                Console.WriteLine("No such room to enter from here");
+                                Console.Read();
+                                GameRun();
+                                break;
+                        }
+
+                    }
+                    else if (roomNr == 10) //bedroom drawer
+                    {
+                        switch (inputWords[1])
+                        {
+
+                            case "BACK":
+                                roomNr = 9;
+                                GameRun();
+                                break;
+                            case "BEDROOM":
+                                roomNr = 9;
+                                GameRun();
+                                break;
+                            default:
+                                Console.WriteLine("No such room to enter from here");
+                                Console.Read();
+                                GameRun();
+                                break;
+                        }
+
+                    }
+                    else if (roomNr == 16) //backyard trasigt fönster
+                    {
+                        switch (inputWords[1])
+                        {
+
+                            case "BEDROOM":
+                                roomNr = 9;
+                                GameRun();
+                                break;
+                            case "KITCHEN":
+                                roomNr = 6;
+                                GameRun();
+                                break;
+                            default:
+                                Console.WriteLine("No such room to enter from here");
+                                Console.Read();
+                                GameRun();
+                                break;
+                        }
+                    }
+                    else if (roomNr == 8) //backyard
+                    {
+                        switch (inputWords[1])
+                        {
+
+                            case "BEDROOM":
+                                Console.WriteLine("The Window is locked.");
+                                Console.ReadLine();
+                                GameRun();
+                                break;
+                            case "KITCHEN":
+                                roomNr = 6;
+                                GameRun();
+                                break;
+                            default:
+                                Console.WriteLine("No such room to enter from here");
+                                Console.Read();
+                                GameRun();
+                                break;
+                        }
+                    }
+                    else if (roomNr == 12) //Källare
+                    {
+                        switch (inputWords[1])
+                        {
+
+                            case "BACK":
+                                roomNr = 4;
+                                GameRun();
+                                break;
+                            case "DININGROOM":
+                                roomNr = 4;
+                                GameRun();
+                                break;
+                            default:
+                                Console.WriteLine("No such room to enter from here");
+                                Console.Read();
+                                GameRun();
+                                break;
+                        }
                     }
 
                 }
-                else if (roomNr == 13 || roomNr == 14)//kyl och frys
+                else if (inputWords[0] == "LOOK" || inputWords[0] == "INSPECT")
                 {
-                    switch (inputWords[1])
+                    bool itemFound = false;
+                    if (inputWords.Length == 1) //Om man bara skrivit look
                     {
-                        case "BACK":
-                            roomNr = 6;
-                            GameRun();
-                            break;
-                        case "KITCHEN":
-                            roomNr = 6;
-                            GameRun();
-                            break;
-                        default:
-                            Console.WriteLine("No such room to enter from here.");
-                            Console.ReadKey();
-                            GameRun();
-                            break;
-
-
+                        RoomList[roomNr].firstTime = true;
+                        GameRun();
                     }
-                }
-                else if (roomNr == 15) //cabinet
-                {
-                    switch (inputWords[1])
+                    else
                     {
-                        case "BACK":
-                            roomNr = 3;
-                            GameRun();
-                            break;
-                        case "BATHROOM":
-                            roomNr = 3;
-                            GameRun();
-                            break;
-                        default:
-                            Console.WriteLine("No such room to enter from here.");
-                            Console.ReadKey();
-                            GameRun();
-                            break;
-                    }
-                }
-                else if (roomNr == 4)//diningroom
-                {
-                    switch (inputWords[1])
-                    {
-                        case "CELLAR":
-                            if (player.playerInventory.Contains(flashlightBatteries))
+                        foreach (var item in RoomList[roomNr].roomdecorations)
+                        {
+                            string temp = item.GetName().ToUpper();
+                            if (temp == inputWords[1])
                             {
-                                roomNr = 12;
+                                itemFound = true;
+                                item.PrintDescription();
+                                Console.Read();
                                 GameRun();
                             }
-                            roomNr = 5;
-                            FatalChoice(); //dödligt val
-                            break;
-                        case "KITCHEN":
-                            roomNr = 6;
-                            GameRun();
-                            break;
-                        case "BACK":
-                            roomNr = 0;
-                            GameRun();
-                            break;
-                        case "LIVINGROOM":
-                            roomNr = 0;
-                            GameRun();
-                            break;
-                        default:
-                            Console.WriteLine("No such room to enter from here.");
-                            Console.Read();
-                            GameRun();
-                            break;
-                    }
-                }
-                else if (roomNr == 6) //kitchen
-                {
-                    switch (inputWords[1])
-                    {
-
-                        case "DININGROOM":
-                            roomNr = 4;
-                            GameRun();
-                            break;
-                        case "BACKYARD":
-                            if (!DogIsSleep)
-                            {
-                                roomNr = 7;
-                                FatalChoice();
-                            }
-                            if (windowIsBroken)
-                            {
-                                roomNr = 16;
-                            }
-                            roomNr = 8;
-                            GameRun();
-                            break;
-                        default:
-                            Console.WriteLine("No such room to enter from here");
-                            Console.Read();
-                            GameRun();
-                            break;
-                    }
-                }
-                else if (roomNr == 9) //bedroom
-                {
-                    switch (inputWords[1])
-                    {
-
-                        case "BACK":
-                            roomNr = 16;
-                            GameRun();
-                            break;
-                        case "BACKYARD":
-                            roomNr = 16;
-                            GameRun();
-                            break;
-                        case "DININGROOM":
-                            Console.WriteLine("The door is locked.");
-                            Console.Read();
-                            GameRun();
-                            break;
-                        default:
-                            Console.WriteLine("No such room to enter from here");
-                            Console.Read();
-                            GameRun();
-                            break;
-                    }
-
-                }
-                else if (roomNr == 10) //bedroom drawer
-                {
-                    switch (inputWords[1])
-                    {
-
-                        case "BACK":
-                            roomNr = 9;
-                            GameRun();
-                            break;
-                        case "BEDROOM":
-                            roomNr = 9;
-                            GameRun();
-                            break;
-                        default:
-                            Console.WriteLine("No such room to enter from here");
-                            Console.Read();
-                            GameRun();
-                            break;
-                    }
-
-                }
-                else if (roomNr == 16) //backyard trasigt fönster
-                {
-                    switch (inputWords[1])
-                    {
-
-                        case "BEDROOM":
-                            roomNr = 9;
-                            GameRun();
-                            break;
-                        case "KITCHEN":
-                            roomNr = 6;
-                            GameRun();
-                            break;
-                        default:
-                            Console.WriteLine("No such room to enter from here");
-                            Console.Read();
-                            GameRun();
-                            break;
-                    }
-                }
-                else if (roomNr == 8) //backyard
-                {
-                    switch (inputWords[1])
-                    {
-
-                        case "BEDROOM":
-                            Console.WriteLine("The Window is locked.");
-                            Console.ReadLine();
-                            GameRun();
-                            break;
-                        case "KITCHEN":
-                            roomNr = 6;
-                            GameRun();
-                            break;
-                        default:
-                            Console.WriteLine("No such room to enter from here");
-                            Console.Read();
-                            GameRun();
-                            break;
-                    }
-                }
-                else if (roomNr == 12) //Källare
-                {
-                    switch (inputWords[1])
-                    {
-
-                        case "BACK":
-                            roomNr = 4;
-                            GameRun();
-                            break;
-                        case "DININGROOM":
-                            roomNr = 4;
-                            GameRun();
-                            break;
-                        default:
-                            Console.WriteLine("No such room to enter from here");
-                            Console.Read();
-                            GameRun();
-                            break;
-                    }
-                }
-
-            }
-            else if (inputWords[0] == "LOOK" || inputWords[0] == "INSPECT")
-            {
-                bool itemFound = false;
-                if (inputWords.Length == 1) //Om man bara skrivit look
-                {
-                    RoomList[roomNr].firstTime = true;
-                    GameRun();
-                }
-                else
-                {
-                    foreach (var item in RoomList[roomNr].roomdecorations)
-                    {
-                        string temp = item.GetName().ToUpper();
-                        if (temp == inputWords[1])
+                        }
+                        foreach (var item in player.playerInventory)
                         {
-                            itemFound = true;
-                            item.PrintDescription();
+                            string temp = item.GetName().ToUpper();
+                            if (temp == inputWords[1])
+                            {
+                                itemFound = true;
+                                item.GetDescription();
+                                Console.Read();
+                                GameRun();
+                            }
+                        }
+                        if (!itemFound)
+                        {
+                            Console.WriteLine("No " + inputWords[1].ToLower() + " to look at.");
                             Console.Read();
                             GameRun();
                         }
                     }
+
+                }
+                else if (inputWords[0] == "GET")
+                {
+                    bool itemFound = false;
+                    foreach (var item in RoomList[roomNr].roomInventory)
+                    {
+                        string temp = item.GetName().ToUpper();
+                        if (temp == inputWords[1])
+                        {
+                            player.playerInventory.Add(item);
+                            RoomList[roomNr].roomInventory.Remove(item);
+                            itemFound = true;
+                            Console.WriteLine("You picked up " + item.GetName() + ".");
+                            Console.ReadLine();
+                            break;
+                        }
+                    }
+
+                    if (!itemFound)
+                    {
+                        Console.WriteLine("No " + inputWords[1].ToLower() + " to get.");
+                        Console.Read();
+
+                    }
+                    GameRun();
+
+
+
+                }
+                else if (inputWords[0] == "DROP")
+                {
+                    bool itemFound = false;
                     foreach (var item in player.playerInventory)
                     {
                         string temp = item.GetName().ToUpper();
                         if (temp == inputWords[1])
                         {
+                            RoomList[roomNr].roomInventory.Add(item);
+                            player.playerInventory.Remove(item);
                             itemFound = true;
-                            item.GetDescription();
-                            Console.Read();
-                            GameRun();
+                            Console.WriteLine("You droped " + item.GetName() + ".");
+                            Console.ReadLine();
+                            break;
                         }
                     }
                     if (!itemFound)
                     {
-                        Console.WriteLine("No " + inputWords[1].ToLower() + " to look at.");
-                        Console.Read();
-                        GameRun();
-                    }
-                }
-
-            }
-            else if (inputWords[0] == "GET")
-            {
-                bool itemFound = false;
-                foreach (var item in RoomList[roomNr].roomInventory)
-                {
-                    string temp = item.GetName().ToUpper();
-                    if (temp == inputWords[1])
-                    {
-                        player.playerInventory.Add(item);
-                        RoomList[roomNr].roomInventory.Remove(item);
-                        itemFound = true;
-                        Console.WriteLine("You picked up " + item.GetName() + ".");
+                        Console.WriteLine("No " + inputWords[1].ToLower() + " to drop.");
                         Console.ReadLine();
-                        break;
                     }
+
+                    GameRun();
                 }
-
-                if (!itemFound)
+                else if (inputWords[0] == "INVENTORY")
                 {
-                    Console.WriteLine("No " + inputWords[1].ToLower() + " to get.");
-                    Console.Read();
-
-                }
-                GameRun();
-
-
-
-            }
-            else if (inputWords[0] == "DROP")
-            {
-                bool itemFound = false;
-                foreach (var item in player.playerInventory)
-                {
-                    string temp = item.GetName().ToUpper();
-                    if (temp == inputWords[1])
+                    if (player.playerInventory.Count < 1)
                     {
-                        RoomList[roomNr].roomInventory.Add(item);
-                        player.playerInventory.Remove(item);
-                        itemFound = true;
-                        Console.WriteLine("You droped " + item.GetName() + ".");
-                        Console.ReadLine();
-                        break;
+                        Console.WriteLine("Your inventory is empty");
                     }
-                }
-                if (!itemFound)
-                {
-                    Console.WriteLine("No " + inputWords[1].ToLower() + " to drop.");
-                    Console.ReadLine();
-                }
-
-                GameRun();
-            }
-            else if (inputWords[0] == "INVENTORY")
-            {
-                if (player.playerInventory.Count < 1)
-                {
-                    Console.WriteLine("Your inventory is empty");
-                }
-                foreach (var item in player.playerInventory)
-                {
-                    Console.WriteLine("Item: " + item.GetName());
-                }
-                Console.Read();
-                GameRun();
-            }
-            else if (inputWords[0] == "USE")
-            {
-                //Först sakerna som ska användas som rum t.ex drawer
-                if (inputWords.Length == 2)
-                {
-                    if (roomNr == 0)
-                    {
-                        if (inputWords[1] == "DRAWER")
-                        {
-                            roomNr = 1;
-                            GameRun();
-                        }
-                    }
-                    if (roomNr == 9)
-                    {
-                        if (inputWords[1] == "DRAWER")
-                        {
-                            roomNr = 10;
-                            GameRun();
-                        }
-                    }
-                    if (roomNr == 6)
-                    {
-                        if (inputWords[1] == "FREEZER")
-                        {
-                            roomNr = 13;
-                            GameRun();
-                        }
-                        if (inputWords[1] == "FRIDGE")
-                        {
-                            roomNr = 14;
-                            GameRun();
-                        }
-                    }
-                    if (roomNr == 3)
-                    {
-                        if (inputWords[1] == "CABINET")
-                        {
-                            roomNr = 15;
-                            GameRun();
-                        }
-                    }
-                    else
-                    {
-                        Console.WriteLine("No reason to do that...");
-                        Console.Read();
-                        GameRun();
-                    }
-                }
-
-                if (inputWords.Length == 4)
-                {
-                    if (inputWords[2] != "ON")
-                    {
-                        Console.WriteLine("Invalid action : " + inputWords[2]);
-                        Console.Read();
-                        GameRun();
-                    }
-                    int itemFound = 0;
-
                     foreach (var item in player.playerInventory)
                     {
-                        string temp1 = item.GetName().ToUpper();
-
-                        if (temp1 == inputWords[1] || temp1 == inputWords[3])
-                        {
-                            itemFound++;
-                        }
+                        Console.WriteLine("Item: " + item.GetName());
                     }
-                    foreach (var item in RoomList[roomNr].roomdecorations)
+                    Console.Read();
+                    GameRun();
+                }
+                else if (inputWords[0] == "USE")
+                {
+                    //Först sakerna som ska användas som rum t.ex drawer
+                    if (inputWords.Length == 2)
                     {
-                        string temp1 = item.GetName().ToUpper();
-
-                        if (temp1 == inputWords[1] || temp1 == inputWords[3])
+                        if (roomNr == 0)
                         {
-                            itemFound++;
-
-                        }
-                    } //kollar om sakerna finns i inventory eller i rummet
-
-                    if (itemFound == 2)
-                    {
-                        if (inputWords[1] == "PILLS" && inputWords[3] == "MEAT")
-                        {
-                            player.playerInventory.Add(lacedMeat);
-                            player.playerInventory.Remove(pills);
-                            player.playerInventory.Remove(meat);
-                            Console.WriteLine(
-                                "You push the pills into the meat. You wonder why you are doing this.");
-                            Console.WriteLine("Your meat is now laced with sleeping pills.");
-                            Console.Read();
-                            GameRun();
-                        }
-                        if (inputWords[1] == "MEAT" && inputWords[3] == "PILLS")
-                        {
-                            player.playerInventory.Add(lacedMeat);
-                            player.playerInventory.Remove(pills);
-                            player.playerInventory.Remove(meat);
-                            Console.WriteLine(
-                                "You push the pills into the meat. You wonder why you are doing this.");
-                            Console.WriteLine("Your meat is now laced with sleeping pills.");
-                            Console.Read();
-                            GameRun();
-                        }
-                        if (inputWords[1] == "BATTERIES" && inputWords[3] == "FLASHLIGHT")
-                        {
-                            player.playerInventory.Add(flashlightBatteries);
-                            player.playerInventory.Remove(flashlightWoBatteries);
-                            player.playerInventory.Remove(batteries);
-                            Console.WriteLine("You put the batteries in the flashlight. It works fine now.");
-                            Console.Read();
-                            GameRun();
-                        }
-                        if (inputWords[1] == "FLASHLIGHT" && inputWords[3] == "BATTERIES")
-                        {
-                            player.playerInventory.Add(flashlightBatteries);
-                            player.playerInventory.Remove(flashlightWoBatteries);
-                            player.playerInventory.Remove(batteries);
-                            Console.WriteLine("You put the batteries in the flashlight. It works fine now.");
-                            Console.Read();
-                            GameRun();
-                        }
-                        
-                        if (roomNr == 8)
-                        {
-                            if (inputWords[1] == "ROCK" && inputWords[3] == "WINDOW")
+                            if (inputWords[1] == "DRAWER")
                             {
-                                player.playerInventory.Remove(rock);
-                                Console.WriteLine("You Throw the rock at the window breaking it. You can now enter the bedroom from here.");
-                                roomNr = 16;
-                                windowIsBroken = true;
-                                Console.Read();
+                                roomNr = 1;
+                                GameRun();
+                            }
+                        }
+                        if (roomNr == 9)
+                        {
+                            if (inputWords[1] == "DRAWER")
+                            {
+                                roomNr = 10;
                                 GameRun();
                             }
                         }
                         if (roomNr == 6)
                         {
-                            if (inputWords[1] == "MEAT" && inputWords[3] == "WINDOW")
+                            if (inputWords[1] == "FREEZER")
                             {
-                                player.playerInventory.Remove(lacedMeat);
-                                Console.WriteLine("You Throw the spiked meat out the window. The family dog swallows it whole and falls asleep right there on the spot.");
-                                DogIsSleep = true;
-                                Console.Read();
+                                roomNr = 13;
+                                GameRun();
+                            }
+                            if (inputWords[1] == "FRIDGE")
+                            {
+                                roomNr = 14;
                                 GameRun();
                             }
                         }
-                        if (roomNr == 2)
+                        if (roomNr == 3)
                         {
-                            if (inputWords[1] == "KEY" && inputWords[3] == "SAFE")
+                            if (inputWords[1] == "CABINET")
                             {
-                                player.playerInventory.Remove(lacedMeat);
-                                Console.WriteLine("You use the Key and unlocks the safe.");
-                                roomNr = 17;
-                                Console.ReadLine();
-                                GameCleared();;
+                                roomNr = 15;
+                                GameRun();
                             }
                         }
                         else
                         {
-                            Console.WriteLine("No reason to do that.");
+                            if (localGameRun)
+                            {
+                                Console.WriteLine("No reason to do that...");
+                                Console.Read();
+                                GameRun();
+                            }
+                        }
+                    }
+
+                    if (inputWords.Length == 4)
+                    {
+                        if (inputWords[2] != "ON")
+                        {
+                            Console.WriteLine("Invalid action : " + inputWords[2]);
                             Console.Read();
                             GameRun();
+                        }
+                        int itemFound = 0;
+
+                        foreach (var item in player.playerInventory)
+                        {
+                            string temp1 = item.GetName().ToUpper();
+
+                            if (temp1 == inputWords[1] || temp1 == inputWords[3])
+                            {
+                                itemFound++;
+                            }
+                        }
+                        foreach (var item in RoomList[roomNr].roomdecorations)
+                        {
+                            string temp1 = item.GetName().ToUpper();
+
+                            if (temp1 == inputWords[1] || temp1 == inputWords[3])
+                            {
+                                itemFound++;
+
+                            }
+                        } //kollar om sakerna finns i inventory eller i rummet
+
+                        if (itemFound == 2)
+                        {
+                            if (inputWords[1] == "PILLS" && inputWords[3] == "MEAT")
+                            {
+                                player.playerInventory.Add(lacedMeat);
+                                player.playerInventory.Remove(pills);
+                                player.playerInventory.Remove(meat);
+                                Console.WriteLine(
+                                    "You push the pills into the meat. You wonder why you are doing this.");
+                                Console.WriteLine("Your meat is now laced with sleeping pills.");
+                                Console.Read();
+                                GameRun();
+                            }
+                            if (inputWords[1] == "MEAT" && inputWords[3] == "PILLS")
+                            {
+                                player.playerInventory.Add(lacedMeat);
+                                player.playerInventory.Remove(pills);
+                                player.playerInventory.Remove(meat);
+                                Console.WriteLine(
+                                    "You push the pills into the meat. You wonder why you are doing this.");
+                                Console.WriteLine("Your meat is now laced with sleeping pills.");
+                                Console.Read();
+                                GameRun();
+                            }
+                            if (inputWords[1] == "BATTERIES" && inputWords[3] == "FLASHLIGHT")
+                            {
+                                player.playerInventory.Add(flashlightBatteries);
+                                player.playerInventory.Remove(flashlightWoBatteries);
+                                player.playerInventory.Remove(batteries);
+                                cellarlight = true;
+                                Console.WriteLine("You put the batteries in the flashlight. It works fine now.");
+                                Console.Read();
+                                GameRun();
+                            }
+                            if (inputWords[1] == "FLASHLIGHT" && inputWords[3] == "BATTERIES")
+                            {
+                                player.playerInventory.Add(flashlightBatteries);
+                                player.playerInventory.Remove(flashlightWoBatteries);
+                                player.playerInventory.Remove(batteries);
+                                cellarlight = true;
+                                Console.WriteLine("You put the batteries in the flashlight. It works fine now.");
+                                Console.Read();
+                                GameRun();
+                            }
+
+                            if (roomNr == 8)
+                            {
+                                if (inputWords[1] == "ROCK" && inputWords[3] == "WINDOW")
+                                {
+                                    player.playerInventory.Remove(rock);
+                                    Console.WriteLine(
+                                        "You Throw the rock at the window breaking it. You can now enter the bedroom from here.");
+                                    roomNr = 16;
+                                    windowIsBroken = true;
+                                    Console.Read();
+                                    GameRun();
+                                }
+                            }
+                            if (roomNr == 6)
+                            {
+                                if (inputWords[1] == "MEAT" && inputWords[3] == "WINDOW")
+                                {
+                                    player.playerInventory.Remove(lacedMeat);
+                                    Console.WriteLine(
+                                        "You Throw the spiked meat out the window. The family dog swallows it whole and falls asleep right there on the spot.");
+                                    DogIsSleep = true;
+                                    Console.Read();
+                                    GameRun();
+                                }
+                            }
+                            if (roomNr == 2)
+                            {
+                                if (inputWords[1] == "KEY" && inputWords[3] == "SAFE")
+                                {
+                                    //player.playerInventory.Remove(lacedMeat);
+                                    Console.WriteLine("You use the Key and unlocks the safe.");
+                                    roomNr = 17;
+                                    Console.ReadLine();
+                                    GameCleared();
+                                }
+                            }
+                            else
+                            {
+                                if (localGameRun)
+                                {
+                                    Console.WriteLine("No reason to do that.");
+                                    Console.Read();
+                                    GameRun();
+                                }
+                            }
+                        }
+                        else
+                        {
+                            if (localGameRun)
+                            {
+                                Console.WriteLine("You don't have one or more of theese items.");
+                                Console.Read();
+                                GameRun();
+                            }
                         }
                     }
                     else
                     {
-                        Console.WriteLine("You don't have one or more of theese items.");
-                        Console.Read();
-                        GameRun();
+
+                        if (localGameRun)
+                        {
+                            Console.WriteLine("No such thing to use...");
+                            Console.Read();
+                            GameRun();
+                        }
+
                     }
                 }
-                else
-                {
-
-                    Console.WriteLine("No such thing to use...");
-                    Console.Read();
-                    GameRun();
-
-                }
             }
-            
+
         }
 
         public void FatalChoice()
         {
-            localGameRun = false;
-            Console.Clear();
-            RoomList[roomNr].getDescription();
+            if (cellarlight == false)
+            {
+                localGameRun = false;
+                Console.Clear();
+                RoomList[roomNr].getDescription();
+            }
             GameRun();
 
         }
@@ -872,7 +898,11 @@ namespace Spel
             {
                 RoomList[roomNr].roomEnter();
                 Input();
-                return true;
+                if (localGameRun)
+                {
+                    return true;
+                }
+                return false;
             }
                 return false;
             
