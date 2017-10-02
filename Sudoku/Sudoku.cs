@@ -9,13 +9,13 @@ namespace Sudoku
 {
     class Sudoku
     {
-       //fields 
-        public int[,] board = new int [9, 9];
+        //fields 
+        public int[,] board = new int[9, 9];
         public string number;
         public int index = 0;
 
         //constructor
-        public Sudoku (string num)
+        public Sudoku(string num)
         {
             number = num;
             CreateBoard();
@@ -28,7 +28,7 @@ namespace Sudoku
             {
                 for (int j = 0; j < 9; j++)
                 {
-                    board[i, j] = (int) Char.GetNumericValue(number[index]);
+                    board[i, j] = (int)Char.GetNumericValue(number[index]);
                     index++;
                 }
             }
@@ -41,7 +41,7 @@ namespace Sudoku
             {
                 for (int j = 0; j < 9; j++)
                 {
-                    Console.Write(board[i,j]);
+                    Console.Write(board[i, j]);
                     if (j == 2 || j == 5)
                     {
                         Console.Write("|");
@@ -52,19 +52,19 @@ namespace Sudoku
                 {
                     Console.WriteLine("-----------");
                 }
-                
+
             }
         }
 
         private int UNASSIGNED = 0;
-        public void Solve()
+        public void Solve(bool alla)
         {
             bool canbesolved = true;
             bool solved = false;
             int noHit = 0;
             while (solved == false)
             {
-               
+
                 solved = true;
                 for (int i = 0; i < 9; i++)
                 {
@@ -74,23 +74,35 @@ namespace Sudoku
                         {
                             noHit = 0;
                             solved = false;
-                            board[i,j] = Search(i, j); //Anropa metod som tilldelar cellen sitt logiskt möjliga värde
+                            board[i, j] = Search(i, j); //Anropa metod som tilldelar cellen sitt logiskt möjliga värde
                             if (board[i, j] != 0) noHit = board[i, j];
                         }
-                        
+
                     }
                     //Console.Clear();
                     //DisplayBoard();
                     //Thread.Sleep(50);
                 }
-                if (noHit == 0) {canbesolved=SolveSudoku(board); }
-                if (canbesolved == false)
+                if (alla == true)
                 {
-                    
-                    break;
+                    if (noHit == 0) { canbesolved = SolveSudoku(board); }
+                    if (canbesolved == false)
+                    {
+
+                        break;
+                    }
+                }
+                else
+                {
+                    if (noHit == 0)
+                    {
+                        canbesolved = false;
+                        Console.WriteLine("Kunde ej lösa detta pussel.");
+                        break;
+                    }
                 }
             }
-            if (canbesolved == true) 
+            if (canbesolved == true)
             {
                 Console.Clear();
                 Console.WriteLine("\nSolved!\n");
@@ -103,12 +115,12 @@ namespace Sudoku
         }
         public int Search(int row/*i*/, int col/*j*/)
         {
-            int nyttnr=0;
+            int nyttnr = 0;
             int returvärde = 0;
-            nyttnr=ControlRow(row, col);
+            nyttnr = ControlRow(row, col);
 
             if (nyttnr != 0) returvärde = nyttnr;
-            
+
             return returvärde;
         }
 
@@ -158,7 +170,7 @@ namespace Sudoku
                 returvärde = ControlBox(row, col, array);
             return returvärde;
         }
-        private int ControlBox (int row, int col, int[]array)
+        private int ControlBox(int row, int col, int[] array)
         {
             int returvärde = 0;
             int[] possible = array;
@@ -181,7 +193,7 @@ namespace Sudoku
                     }
                     col++;
                 }
-                row++;  
+                row++;
             }
             Array.Sort(array);
             if (array[8] != 0 && array[7] == 0)
@@ -190,8 +202,8 @@ namespace Sudoku
                 return returvärde;
             }
             else
-                
-            return 0;
+
+                return 0;
         }
         bool SolveSudoku(int[,] board)
         {
